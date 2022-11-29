@@ -1,4 +1,3 @@
-a
 <?php
 require_once "./tools/tools.php";
 session_start();
