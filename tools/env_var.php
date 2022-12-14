@@ -1,6 +1,6 @@
 <?php
 
-require_once "./debug_mode.php";
+require_once dirname(__FILE__).'/debug_mode.php';
 
 if(DEBUG_MODE) {
     // Error report
