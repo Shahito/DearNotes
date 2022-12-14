@@ -1,6 +1,6 @@
 <?php
 
-define("DEBUG_MODE",FALSE);
+require_once "./debug_mode.php";
 
 if(DEBUG_MODE) {
     // Error report
