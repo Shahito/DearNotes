@@ -31,6 +31,8 @@
 
     --transition-speed: 400ms;
     --fast-transition-speed: 150ms;
+
+    --canvas-size: 30rem;
 }
 
 * {
@@ -47,6 +49,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
+    height: 100%;
     background-color: var(--bg-primary);
     color: var(--font-primary);
 }
@@ -66,6 +69,7 @@ body.preload #bubble-menu * {
 
 main {
     width: 100%;
+    min-height: 100%;
     height: 100%;
     overflow: hidden;
     display: flex;
@@ -86,6 +90,21 @@ main#link {
     align-items: center;
     min-height: 100%;
     overflow-y: scroll;
+}
+
+#home-body,
+#notes-body {
+    background-color: var(--bg-primary);
+}
+
+html:has(
+    #login-body,
+    #account-body,
+    #link-body),
+#login-body,
+#account-body,
+#link-body {
+    background-color: var(--bg-secondary);
 }
 
 main#link {
@@ -124,7 +143,7 @@ main#link {
     }
 }
 
-main * {
+main *:not(#transition-bg) {
     animation: fade-in 0.5s !important;
 }
 
@@ -174,9 +193,10 @@ div#transition-bg[active-bg3='true'] {
 
 /* Draw page */
 canvas {
-    width: 30rem;
-    height: 30rem;
+    width: var(--canvas-size);
+    height: var(--canvas-size);
     cursor: crosshair;
+    transition: filter 0.25s ease-in-out;
 }
 
 div#new-note-container {
@@ -186,6 +206,7 @@ div#new-note-container {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 div#canvas-command,
@@ -195,6 +216,7 @@ div#draw-palette {
     width: 30rem;
     height: 2rem;
     align-items: center;
+    z-index: 3;
 }
 
 div#canvas-command span#cancel-btn,
@@ -224,13 +246,21 @@ div#draw-palette span {
     transition: transform var(--transition-speed);
 }
 
-div#canvas-command div#brush-size-selector span[selected] span.icon-round-brush {
+div#draw-palette #eraser-brush,
+div#draw-palette #selected-brush {
+    margin: 0 1rem;
+}
+
+div#brush-size-selector span[selected] span.icon-round-brush {
     outline: 2px solid var(--font-primary);
     outline-offset: 2px;
 }
 
-div#draw-palette span[selected] {
+span.color-brush[selected] {
     transform-origin: 50% 50%;
+    transform: scale(1.3);
+}
+span#eraser-brush[selected] {
     transform: scale(1.3);
 }
 
@@ -240,19 +270,19 @@ div#canvas-command {
 }
 
 div#draw-palette {
-    justify-content: center;
+    justify-content: space-between;
     gap: 1.2rem;
     border-radius: 0 0 1rem 1rem;
 }
 
-div#canvas-command div#brush-size-selector {
+#brush-size-selector {
     height: 1rem;
     display: flex;
     flex-direction: row;
     gap: 0.8rem;
 }
 
-div#canvas-command span.icon-round-brush {
+#brush-size-selector span.icon-round-brush {
     width: 0.8rem;
     height: 0.8rem;
     background: var(--font-primary);
@@ -276,16 +306,77 @@ span#brush-size-3 span.icon-round-brush {
     width: 0.6rem;
     height: 0.6rem;
 }
-
-span#black-brush { background: #000; }
-span#red-brush { background: #f00; }
-span#pink-brush { background: #fe80c9; }
-span#green-brush { background: #0f0; }
-span#cyan-brush { background: #0ff; }
-span#blue-brush { background: #00f; }
-
+span#selected-brush {
+    background-color: #000;
+}
+span#selected-brush[rnb="true"] {
+    background: linear-gradient(135deg, #f00 10%, #f80 30%, #ff0 40%, #0f0 50%, #0ff 60%, #08f 70%, #00f 90%);
+}
+span.color-brush {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: opacity 0.5s,
+                translate 0.75s -0.25s!important;
+}
+span.color-brush[visible="false"] {
+    opacity: 0;
+    scale: 0;
+    pointer-events: none;
+    transition: scale 0s 0.25s,
+                opacity 0.25s,
+                translate 0s 0.25s!important;
+}
+span.color-brush[visible="false"]:not(#black-brush,#white-brush) {
+    translate: -50% -50%!important;
+}
+span.color-brush[visible="true"] {
+    opacity: 1;
+    scale: 1;
+}
+canvas[palette-open="true"] {
+    pointer-events: none;
+    filter: brightness(0.5) grayscale(0.75) blur(2px);
+    overflow: hidden;
+}
+div.canvas-wrapper {
+    overflow: hidden;
+}
+span#black-brush {
+    background: #000;
+    translate: calc(-0.4 * var(--canvas-size) - 50%) calc(0.4 * var(--canvas-size)  - 50%);
+}
+span#white-brush {
+    background: #fff;
+    translate: calc(0.4 * var(--canvas-size)  - 50%) calc(0.4 * var(--canvas-size)  - 50%);
+}
+span#red-brush {
+    background: #f00;
+    translate: -50% calc(-0.2 * var(--canvas-size) - 50%);
+}
+span#orange-brush {
+    background: #f80;
+    translate: calc(0.175 * var(--canvas-size) - 50%) calc(-0.1 * var(--canvas-size) - 50%);
+}
+span#pink-brush {
+    background: #fe80c9;
+    translate: calc(-0.175 * var(--canvas-size) - 50%) calc(-0.1 * var(--canvas-size) - 50%);
+}
+span#green-brush {
+    background: #0f0;
+    translate: calc(0.175 * var(--canvas-size) - 50%) calc(0.1 * var(--canvas-size) - 50%);
+}
+span#cyan-brush {
+    background: #0ff;
+    translate: -50% calc(0.2 * var(--canvas-size) - 50%);
+}
+span#blue-brush {
+    background: #00f;
+    translate: calc(-0.175 * var(--canvas-size) - 50%) calc(0.1 * var(--canvas-size) - 50%);
+}
 span#rainbow-brush {
     background: linear-gradient(135deg, #f00 10%, #f80 30%, #ff0 40%, #0f0 50%, #0ff 60%, #08f 70%, #00f 90%);
+    translate: -50% -50%;
 }
 
 /* live notes style */
@@ -299,6 +390,10 @@ div.notes {
     transform-origin: 50% 50%;
     z-index: 1;
     user-select: none;
+    visibility: hidden;
+}
+div.notes.loaded {
+    visibility: visible;
 }
 div.notes div.spotlight {
     position: absolute;
@@ -377,18 +472,19 @@ div.memories-suggestion {
     align-items: center;
 }
 
-div.memories-suggestion button {
+#memories-reveal {
+    width: 15rem;
     opacity: 1;
     font-size: 1.2rem;
     transition: opacity 0.5s;
 }
 
-div.memories-suggestion[drawn] button {
+div.memories-suggestion[drawn] #memories-reveal {
     opacity: 0;
 }
 
 div.memories-suggestion button img {
-    height: 15rem;
+    width: 100%;
 }
 
 div.memories-suggestion span.memories-title {
@@ -437,26 +533,25 @@ div.bubble-action {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 2px 2px 2px 0px var(--theme-shadow);
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--theme-shadow);
 }
 
 div#bubble-menu-deployer,
 div#bubble-action-home {
     bottom: 1.5rem;
     right: 1.5rem;
-    cursor: pointer;
     z-index: 101;
 }
 
 div#bubble-action-refresh {
     top: 1.5rem;
     right: 1.5rem;
-    cursor: pointer;
     z-index: 98;
 }
 
 div.bubble-action:hover {
-    box-shadow: 1px 1px 2px var(--theme-shadow);
+    box-shadow: 1px 1px 0px var(--theme-shadow);
 }
 
 body.preload div#bubble-action-refresh svg {
@@ -481,6 +576,22 @@ div.bubble-action svg {
     transition: opacity 0.5s;
 }
 
+header {
+    position: absolute;
+    background-color: transparent;
+    width: 0;
+    height: 0;
+    z-index: 100;
+    transition: background-color 0.5s,
+                width 0s 0.5s,
+                height 0s 0.5s;
+}
+header.darken {
+    background-color: #33333388;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.75s;
+}
 ul#bubble-menu {
     position: fixed;
     bottom: 4.75rem;
@@ -501,7 +612,10 @@ ul#bubble-menu li * {
 }
 
 ul#bubble-menu li>* {
-    box-shadow: 1px 1px 1px var(--theme-shadow);
+    box-shadow: 2px 2px 0px var(--theme-shadow);
+}
+ul#bubble-menu li:hover>* {
+    box-shadow: 1px 1px 0px var(--theme-shadow);
 }
 
 div.bubble-menu-item-title {
@@ -528,13 +642,15 @@ div.bubble-menu-item-icon svg {
     fill: var(--font-secondary);
 }
 
-div#bubble-menu-container[selected="false"] ul#bubble-menu li div.bubble-menu-item-title {
+div#bubble-menu-container[selected="false"] ul#bubble-menu li div.bubble-menu-item-title,
+body.transition div#bubble-menu-container ul#bubble-menu li div.bubble-menu-item-title {
     transform: scaleX(0);
     transform-origin: 100% 50%;
     transition: all 0.25s;
 }
 
-div#bubble-menu-container[selected="false"] ul#bubble-menu {
+div#bubble-menu-container[selected="false"] ul#bubble-menu,
+body.transition div#bubble-menu-container ul#bubble-menu {
     visibility: hidden;
 }
 
@@ -550,7 +666,8 @@ div#bubble-menu-container[selected="false"] ul#bubble-menu li:nth-child(1) {
     --bubble-items-from-origin: 11.25rem;
 }
 
-div#bubble-menu-container[selected="false"] ul#bubble-menu li {
+div#bubble-menu-container[selected="false"] ul#bubble-menu li,
+body.transition div#bubble-menu-container ul#bubble-menu li {
     transform: translateY(var(--bubble-items-from-origin));
     animation: hide-bubble-items 0.5s;
 }
@@ -573,10 +690,6 @@ form {
     justify-content: center;
     align-items: center;
     margin: 1rem 0;
-}
-
-img.spacer-line-brush-style-vertical {
-    height: 70%;
 }
 
 form label {
@@ -657,9 +770,31 @@ form input[type='password'][invalid] {
 }
 
 form input[type='submit'][invisible] {
-    filter: grayscale();
-    pointer: none;
+    filter: grayscale(1);
     pointer-events: none;
+}
+main#login-section input[type='submit'] {
+    margin-bottom: 1rem;
+}
+
+form.hide {
+    display: none;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+form.show {
+    display: flex;
+    z-index: 1;
+    opacity: 1;
+}
+form.show button.login-register-switch {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--font-secondary);
+    cursor: pointer;
+    border: none;
+    background: transparent;
 }
 
 /* cookie alert */
@@ -764,9 +899,9 @@ button#memories-reveal {
 button#memories-reveal:hover {
     background: var(--theme-secondary);
 }
-
-img.spacer-line-brush-style-horizontal {
-    display: none;
+#memories-reveal.no-memories {
+    filter: grayscale(1);
+    pointer-events: none;
 }
 
 div.account-stats {
@@ -904,18 +1039,18 @@ div.pres-img-waiting img {
 @media only screen and (max-width:720px) {
     :root {
         font-size: 16px;
+        --canvas-size: 20rem;
     }
 
     canvas {
-        width: 20rem;
-        height: 20rem;
+        width: var(--canvas-size);
+        height: var(--canvas-size);
     }
     div#canvas-command,
     div#draw-palette {
         width: 20rem;
     }
     div#draw-palette {
-        justify-content: space-evenly;
         gap: unset;
     }
 
@@ -925,7 +1060,6 @@ div.pres-img-waiting img {
         justify-content: unset;
     }
 
-    main#login-section input[type='submit'],
     main#link input[type='submit'] {
         margin-bottom: 1rem;
     }
@@ -943,15 +1077,6 @@ div.pres-img-waiting img {
     main#account div.account-stats {
         margin-top: 1rem;
         margin-bottom: 5.5rem;
-    }
-
-    img.spacer-line-brush-style-vertical {
-        display: none;
-    }
-    img.spacer-line-brush-style-horizontal {
-        display: block;
-        width: 70%;
-        margin: 0.5rem 0;
     }
 
     div#bubble-action-refresh {
@@ -1012,9 +1137,6 @@ div.pres-img-waiting img {
     }
     div.memories-suggestion button {
         font-size: 1rem;
-    }
-    div.memories-suggestion button img {
-        height: 10rem;
     }
     div.memories-suggestion div.notes {
         transform: scale(0.7);

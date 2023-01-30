@@ -11,6 +11,7 @@ $user_token=get_user_token_from_id($conn,$_SESSION['user_id']);
         <title><?php echo SITE_NAME;?> - Mise en relation</title>
         <link rel="stylesheet" href="../style/main.css"/>
         <link href="../ressources/tab-icon.svg" rel="icon"/>
+        <link href="../ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
         <meta name="msapplication-navbutton-color" content="#333">
         <meta name="apple-mobile-web-app-status-bar-style" content="#333">
@@ -18,7 +19,7 @@ $user_token=get_user_token_from_id($conn,$_SESSION['user_id']);
         <!-- Font awesome import -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body draggable="false" class="preload">
+    <body id="link-body" draggable="false" class="preload">
         <header></header>
         <main id="link">
             <div class="pres-img-waiting">
