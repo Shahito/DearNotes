@@ -30,7 +30,9 @@ for (var i=0;i<notes.length;i++) {
     }
     note.style.top=randomTop+"px";
     note.style.left=randomLeft+"px";
+    note.classList.add("loaded");
 }
+
 function getRandomNumber(min,max) {
     return Math.random()*(max-min)+min;
 }

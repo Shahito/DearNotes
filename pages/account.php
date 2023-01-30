@@ -10,6 +10,7 @@ if(!has_link_in_db($conn,$_SESSION['user_id'])) header("Location: ".ROOT."/pages
         <title><?php echo SITE_NAME;?> - Compte</title>
         <link rel="stylesheet" href="../style/main.css"/>
         <link href="../ressources/tab-icon.svg" rel="icon"/>
+        <link href="../ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
         <meta name="msapplication-navbutton-color" content="#333">
         <meta name="apple-mobile-web-app-status-bar-style" content="#333">
@@ -17,7 +18,7 @@ if(!has_link_in_db($conn,$_SESSION['user_id'])) header("Location: ".ROOT."/pages
         <!-- Font awesome import -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body draggable="false" class="preload">
+    <body id="account-body" draggable="false" class="preload">
         <header>
             <div id="bubble-action-home" class="bubble-action" onClick="goWithTransition('../',2)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" alt="Icone de retour au menu">

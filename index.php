@@ -10,12 +10,13 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
         <title><?php echo SITE_NAME;?> - Accueil</title>
         <link rel="stylesheet" href="./style/main.css"/>
         <link href="./ressources/tab-icon.svg" rel="icon"/>
+        <link href="./ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
         <meta name="msapplication-navbutton-color" content="#333">
         <meta name="apple-mobile-web-app-status-bar-style" content="#333">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body draggable="false" class="preload">
+    <body id="home-body" draggable="false" class="preload">
         <header>
             <div id="bubble-action-refresh" class="bubble-action" onClick="location.href='.'">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" alt="Icone de rechargement de la page">
@@ -73,20 +74,23 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
                     echo "<div class='shadow'></div><div class='spotlight'></div></div>";
                 }
             } else {
-                $linked_user_id=get_linked_user_id($conn,$_SESSION['user_id']);
-                $notes=get_all_saved_notes_from_author($conn,$linked_user_id);
-                if(count($notes)!=0) {
-                    srand(mktime(0,0,0));
-                    $random_note_index=rand(0,count($notes)-1);
+                $random_note_data=get_today_random_note_data($conn);
+                if($random_note_data!=FALSE) {
                     echo "<div class='memories-suggestion'>";
                     echo "<button id='memories-reveal' onClick='display_random_notes()'>";
                     echo "<img src='./ressources/crying-peach-endless.gif' alt='Gif de Goma qui console Peach (mochi cat)'/>";
                     echo "Voir un souvenir aléatoire</button>";
                     echo "<span class='memories-title'>Le souvenir d'aujourd'hui</span>";
                     echo "<div class='notes'>";
-                    echo "<img src='".$notes[$random_note_index][0]."' alt='Note'/>";
-                    echo "<span>Créée le ".get_formatted_date_from_date($notes[$random_note_index][1])."</span>";
+                    echo "<img src='".$random_note_data[SAVED_NOTES_DATA]."' alt='Note'/>";
+                    echo "<span>Créée le ".get_formatted_date_from_date($random_note_data[SAVED_NOTES_DATE])."</span>";
                     echo "<div class='shadow'></div><div class='spotlight'></div></div></div>";
+                } else {
+                    echo "<div class='memories-suggestion'>";
+                    echo "<button id='memories-reveal' class='no-memories'>";
+                    echo "<img src='./ressources/crying-pillow-peach-endless.gif' alt='Gif de Peach qui pleure contre un oreiller (mochi cat)'/>";
+                    echo "Aucune note archivée</button>";
+                    echo "</div";
                 }
             }
             mysqli_close($conn);

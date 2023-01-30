@@ -15,6 +15,7 @@ if(is_login()) {
         <title><?php echo SITE_NAME;?> - Connexion</title>
         <link rel="stylesheet" href="../style/main.css"/>
         <link href="../ressources/tab-icon.svg" rel="icon"/>
+        <link href="../ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
         <meta name="msapplication-navbutton-color" content="#333">
         <meta name="apple-mobile-web-app-status-bar-style" content="#333">
@@ -22,11 +23,11 @@ if(is_login()) {
         <!-- Font awesome import -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body draggable="false" class="">
+    <body id="login-body" draggable="false" class="">
         <header></header>
         <main id="login-section">
             <!-- Login form -->
-            <form id="login" action="../tools/login" method="POST">
+            <form id="login" class="show" action="../tools/login" method="POST">
                 <label for="user-login">
                     Nom d'utilisateur :
                 </label>
@@ -41,11 +42,10 @@ if(is_login()) {
                     }
                 ?>
                 <input type="submit" value="Se connecter" invisible/>
+                <button onClick="swicthToRegisterForm()" id="register-switch" class="login-register-switch">Nouveau ? Créer un compte</button>
             </form>
-            <img class="spacer-line-brush-style-vertical" src="../ressources/line-brush-vertical.png" draggable="false" alt="Séparation vertical en forme de coup de pinceau"/>
-            <img class="spacer-line-brush-style-horizontal" src="../ressources/line-brush-horizontal.png" draggable="false" alt="Séparation horizontal en forme de coup de pinceau"/>
             <!-- Register form -->
-            <form id="register" action="../tools/register" method="POST">
+            <form id="register" class="hide" action="../tools/register" method="POST">
                 <label for="register-user">
                     Nom d'utilisateur :
                 </label>
@@ -70,6 +70,7 @@ if(is_login()) {
                 ?>
                 <div class="warning-field"></div>
                 <input type="submit" value="Créer un compte" invisible/>
+                <button onClick="swicthToLoginForm()" id="login-switch" class="login-register-switch">Dejà un compte ? Se connecter</button>
             </form>
         </main>
         <div id="transition-bg"></div>
@@ -77,6 +78,24 @@ if(is_login()) {
     </body>
     <script src="../tools/cookie_alert.js"></script>
     <script src="../tools/confirm_password.js"></script>
+    <script>
+        function swicthToRegisterForm() {
+            login_form=document.querySelector("form#login");
+            register_form=document.querySelector("form#register");
+            login_form.classList.add("hide");
+            login_form.classList.remove("show");
+            register_form.classList.add("show");
+            register_form.classList.remove("hide");
+        }
+        function swicthToLoginForm() {
+            login_form=document.querySelector("form#login");
+            register_form=document.querySelector("form#register");
+            register_form.classList.add("hide");
+            register_form.classList.remove("show");
+            login_form.classList.add("show");
+            login_form.classList.remove("hide");
+        }
+    </script>
     <script>
         verify_password("login","login-password");
         verify_password("register","register-password","register-confirm-password");

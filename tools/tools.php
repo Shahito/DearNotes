@@ -204,7 +204,7 @@ function get_formatted_date_from_date(String $date) {
 function get_formatted_left_time_from_date(String $creation_date_in_db) {
     $creation_date=DateTime::createFromFormat("Y-m-d H:i:s",$creation_date_in_db);
     $now=new DateTime('now');
-    $creation_date->add(new DateInterval('PT24H0M0S'));
+    $creation_date->modify('+24 hours');
     $diff=$creation_date->diff($now);
     return (($diff->h!=0)?$diff->h."h":$diff->i."m");
 }
@@ -212,7 +212,7 @@ function get_formatted_left_time_from_date(String $creation_date_in_db) {
 function is_notes_expired(String $creation_date_in_db) {
     $creation_date=DateTime::createFromFormat("Y-m-d H:i:s",$creation_date_in_db);
     $now=new DateTime('now');
-    $creation_date->add(new DateInterval('PT24H0M0S'));
+    $creation_date->modify('+24 hours');
     if($creation_date<$now) {
         return TRUE;
     }
@@ -260,11 +260,21 @@ function get_all_notes_from_link($conn,$link_id) {
     return $result;
 }
 
-function get_all_saved_notes_from_author($conn,$linked_user_id) {
-    $query="SELECT `".SAVED_NOTES_DATA."`,`".SAVED_NOTES_DATE."` FROM `".SAVED_NOTES_TABLE."` 
-    WHERE `".SAVED_NOTES_AUTHOR_ID."`=?";
-    $query_select=$conn->prepare($query);
-    $query_select->bind_param("s",$linked_user_id);
+function get_all_saved_notes_ids_from_author($conn,$linked_user_id,$exclude_yest=FALSE) {
+    if(!$exclude_yest) {
+        $query="SELECT `".SAVED_NOTES_ID."` FROM `".SAVED_NOTES_TABLE."` 
+        WHERE `".SAVED_NOTES_AUTHOR_ID."`=?";
+        $query_select=$conn->prepare($query);
+        $query_select->bind_param("s",$linked_user_id);
+    } else {
+        // select only note id that are at least 2 day old to
+        // take out notes that wasn't in the yesterday random choice
+        $query="SELECT `".SAVED_NOTES_ID."` FROM `".SAVED_NOTES_TABLE."`
+        WHERE `".SAVED_NOTES_AUTHOR_ID."`=? AND `".SAVED_NOTES_DATE."`<?";
+        $query_select=$conn->prepare($query);
+        $y_date=(((new DateTime())->modify('-2 days'))->format("Y-m-d H:i:s"));
+        $query_select->bind_param("ss",$linked_user_id,$y_date);
+    }
     $query_select->execute() or die(ERROR_DB_MESSAGE);
     $result=$query_select->get_result()->fetch_all();
     return $result;
@@ -318,6 +328,43 @@ function get_notes_number_from_user(mysqli $conn,String $user_id) {
     $query_select->bind_param("ss",$user_id,$link_id);
     $query_select->execute() or die(ERROR_DB_MESSAGE);
     $result+=$query_select->get_result()->fetch_row()[0];
+    return $result;
+}
+
+function get_yesterday_random_note_id($conn,$notes_ids) {
+    // get note id using yesterday day as random seed
+    srand(mktime(0,0,0,date("m"),date("d")-1,date("Y")));
+    if(count($notes_ids)<=0) { return FALSE; }
+    $random_note_index=rand(0,count($notes_ids)-1);
+    return $random_note_index;
+}
+function get_today_random_note_id($conn) {
+    // get note id and data using today's as random seed
+    $linked_user_id=get_linked_user_id($conn,$_SESSION['user_id']);
+    $yest_notes_ids=get_all_saved_notes_ids_from_author($conn,$linked_user_id,$exclude_yest=TRUE);
+    $notes_ids=get_all_saved_notes_ids_from_author($conn,$linked_user_id);
+    if(count($notes_ids)>=2) {
+        $yesterday_note_id=get_yesterday_random_note_id($conn,$yest_notes_ids);
+        if($yesterday_note_id!==FALSE) {
+            array_splice($notes_ids,$yesterday_note_id,1);
+        }
+        srand(mktime(0,0,0));
+        $random_note_index=rand(0,count($notes_ids)-1);
+        return $notes_ids[$random_note_index][0];
+    } else if (count($notes_ids)===1) {
+        return $notes_ids[0][0];
+    }
+    return FALSE;
+}
+function get_today_random_note_data($conn) {
+    $note_id=get_today_random_note_id($conn);
+    if($note_id===FALSE) { return FALSE; }
+    $query="SELECT `".SAVED_NOTES_DATA."`,`".SAVED_NOTES_DATE."` FROM `".SAVED_NOTES_TABLE."` 
+    WHERE `".SAVED_NOTES_ID."`=?";
+    $query_select=$conn->prepare($query);
+    $query_select->bind_param("s",$note_id);
+    $query_select->execute() or die(ERROR_DB_MESSAGE);
+    $result=$query_select->get_result()->fetch_assoc();
     return $result;
 }
 ?>

@@ -11,6 +11,7 @@ mysqli_close($conn);
         <title><?php echo SITE_NAME;?> - Nouveau mot</title>
         <link rel="stylesheet" href="../style/main.css"/>
         <link href="../ressources/tab-icon.svg" rel="icon"/>
+        <link href="../ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
         <meta name="msapplication-navbutton-color" content="#333">
         <meta name="apple-mobile-web-app-status-bar-style" content="#333">
@@ -18,7 +19,7 @@ mysqli_close($conn);
         <!-- Font awesome import -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body draggable="false" class="preload" style="overscroll-behavior-y: contain;">
+    <body id="notes-body" draggable="false" class="preload" style="overscroll-behavior-y: contain;">
         <header>
             <div id="bubble-action-home" class="bubble-action" onClick="goWithTransition('../',0)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" alt="Icone de retour au menu">
@@ -26,7 +27,7 @@ mysqli_close($conn);
                 </svg>
             </div>
         </header>
-        <main>
+        <main id="notes">
             <div id="new-note-container">
                 <div id="canvas-command">
                     <span id="cancel-btn" class="btn">
@@ -34,28 +35,35 @@ mysqli_close($conn);
                             <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
                         </svg>
                     </span>
-                    <div id="brush-size-selector">
-                        <span id="brush-size-1" size="2" selected><span class="icon-round-brush"></span></span>
-                        <span id="brush-size-2" size="10"><span class="icon-round-brush"></span></span>
-                        <span id="brush-size-3" size="20"><span class="icon-round-brush"></span></span>
-                        <span id="brush-size-4" size="100"><span class="icon-round-brush"></span></span>
-                    </div>
                     <span id="save-btn" class="btn">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" alt="Icone de coche, valider">
                             <path d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
                         </svg>
                     </span>
                 </div>
-                <canvas id="draw-box"></canvas>
+                <div class="canvas-wrapper">
+                    <canvas id="draw-box" palette-open="false"></canvas>
+                </div>
                 <div id="draw-palette">
                     <span id="eraser-brush" color="eraser"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M290.7 57.4L57.4 290.7c-25 25-25 65.5 0 90.5l80 80c12 12 28.3 18.7 45.3 18.7H288h9.4H512c17.7 0 32-14.3 32-32s-14.3-32-32-32H387.9L518.6 285.3c25-25 25-65.5 0-90.5L381.3 57.4c-25-25-65.5-25-90.5 0zM297.4 416H288l-105.4 0-80-80L227.3 211.3 364.7 348.7 297.4 416z"/></svg></span>
-                    <span id="black-brush" color="#000" selected></span>
-                    <span id="red-brush" color="#f00"></span>
-                    <span id="pink-brush" color="#fe80c9"></span>
-                    <span id="green-brush" color="#0f0"></span>
-                    <span id="cyan-brush" color="#0ff"></span>
-                    <span id="blue-brush" color="#00f"></span>
-                    <span id="rainbow-brush" color="rnb"></span>
+                    
+                    <div id="brush-size-selector">
+                        <span id="brush-size-1" class="brush-size-btn" size="2" selected><span class="icon-round-brush"></span></span>
+                        <span id="brush-size-2" class="brush-size-btn" size="10"><span class="icon-round-brush"></span></span>
+                        <span id="brush-size-3" class="brush-size-btn" size="20"><span class="icon-round-brush"></span></span>
+                        <span id="brush-size-4" class="brush-size-btn" size="100"><span class="icon-round-brush"></span></span>
+                    </div>
+
+                    <span id="selected-brush" rnb="false"></span>
+                    <span id="black-brush" class="color-brush" visible="false" color="#000" selected></span>
+                    <span id="white-brush" class="color-brush" visible="false" color="#fff"></span>
+                    <span id="red-brush" class="color-brush" visible="false" color="#f00"></span>
+                    <span id="orange-brush" class="color-brush" visible="false" color="#f80"></span>
+                    <span id="pink-brush" class="color-brush" visible="false" color="#fe80c9"></span>
+                    <span id="green-brush" class="color-brush" visible="false" color="#0f0"></span>
+                    <span id="cyan-brush" class="color-brush" visible="false" color="#0ff"></span>
+                    <span id="blue-brush" class="color-brush" visible="false" color="#00f"></span>
+                    <span id="rainbow-brush" class="color-brush" visible="false" color="rnb"></span>
                 </div>
             </div>
             <form id="form-post-notes" action="../tools/add-notes" method="POST">

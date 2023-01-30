@@ -13,6 +13,7 @@ resize();
 ctx.fillStyle=fillColor;
 ctx.fillRect(0,0,canvas.offsetWidth,canvas.offsetHeight);
 var pos={x:0,y:0};
+toggleColorSelector();
 setBrushColor();
 setBrushSize();
 cancel_btn.addEventListener("click",clear);
@@ -25,6 +26,7 @@ canvas.addEventListener('mouseenter',draw);
 canvas.addEventListener('touchstart',draw);
 canvas.addEventListener('mousemove',draw);
 canvas.addEventListener('touchmove',draw);
+
 function setPosition(e) {
     if(e.targetTouches) {
         let touch=e.targetTouches[0];
@@ -59,13 +61,35 @@ function draw(e) {
         ctx.closePath();
     }
 }
+function toggleColorSelector() {
+    let color_indicator=document.getElementById("selected-brush");
+    color_indicator.addEventListener("click",() => {
+        let brush_selectors=document.querySelectorAll("#draw-palette span.color-brush");
+        brush_selectors.forEach(brush => {
+            if(brush.getAttribute("visible")==="false") {
+                brush.setAttribute("visible","true");
+                canvas.setAttribute("palette-open","true");
+            } else {
+                brush.setAttribute("visible","false");
+                canvas.setAttribute("palette-open","false");
+            }
+        });
+    });
+}
 function setBrushColor() {
-    let brushSelectors=document.querySelectorAll("#draw-palette span");
-    brushSelectors.forEach(brush => {
+    let color_indicator=document.getElementById("selected-brush");
+    let brush_selectors=document.querySelectorAll("#draw-palette span.color-brush,#eraser-brush");
+    brush_selectors.forEach(brush => {
         brush.addEventListener("click",() => {
-            brushSelectors.forEach((el) => { el.removeAttribute("selected"); });
+            brush_selectors.forEach((el) => { el.removeAttribute("selected"); });
             brush.setAttribute("selected","");
             color=brush.getAttribute("color");
+            color_indicator.style.backgroundColor=color;
+            color_indicator.setAttribute("rnb","false");
+            brush_selectors.forEach(_ => {
+                _.setAttribute("visible","false");
+            });
+            canvas.setAttribute("palette-open","false");
             if(color==="rnb") {
                 brushColor=Array(
                     "#f00","#f10","#f20","#f30","#f40","#f50","#f60","#f70",
@@ -81,6 +105,7 @@ function setBrushColor() {
                     "#f0f","#f0e","#f0d","#f0c","#f0b","#f0a","#f09","#f08",
                     "#f07","#f06","#f05","#f04","#f03","#f02","#f01"
                 );
+                color_indicator.setAttribute("rnb","true");
             } else if(color==="eraser") {
                 brushColor=fillColor;
             } else {
@@ -90,10 +115,10 @@ function setBrushColor() {
     });
 }
 function setBrushSize() {
-    let brushSelectors=document.querySelectorAll("#canvas-command span:not(.btn)");
-    brushSelectors.forEach(brush => {
+    let brush_selectors=document.querySelectorAll("#draw-palette span.brush-size-btn");
+    brush_selectors.forEach(brush => {
         brush.addEventListener("click",() => {
-            brushSelectors.forEach((el) => { el.removeAttribute("selected"); });
+            brush_selectors.forEach((el) => { el.removeAttribute("selected"); });
             brushSize=onPhone?brush.getAttribute("size")*0.7:brush.getAttribute("size");
             brush.setAttribute("selected","");
         });
