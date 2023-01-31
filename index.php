@@ -81,7 +81,7 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
                     echo "<img src='./ressources/crying-peach-endless.gif' alt='Gif de Goma qui console Peach (mochi cat)'/>";
                     echo "Voir un souvenir aléatoire</button>";
                     echo "<span class='memories-title'>Le souvenir d'aujourd'hui</span>";
-                    echo "<div class='notes'>";
+                    echo "<div class='notes loaded'>";
                     echo "<img src='".$random_note_data[SAVED_NOTES_DATA]."' alt='Note'/>";
                     echo "<span>Créée le ".get_formatted_date_from_date($random_note_data[SAVED_NOTES_DATE])."</span>";
                     echo "<div class='shadow'></div><div class='spotlight'></div></div></div>";
