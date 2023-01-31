@@ -345,14 +345,10 @@ function get_yesterday_random_note_id($conn,$notes_ids) {
     return $random_note_index;
 }
 function get_today_random_note_id($conn) {
-
     // get note id and data using today's as random seed
     $linked_user_id=get_linked_user_id($conn,$_SESSION['user_id']);
     $yest_notes_ids=get_all_saved_notes_ids_from_author($conn,$linked_user_id,$exclude_yest=TRUE);
     $notes_ids=get_all_saved_notes_ids_from_author($conn,$linked_user_id);
-    srand(mktime(0,0,0));
-    $random_note_index=rand(0,count($notes_ids)-1);
-    return $notes_ids[$random_note_index][0];
     if(count($notes_ids)>=2) {
         $yesterday_note_id=get_yesterday_random_note_id($conn,$yest_notes_ids);
         if($yesterday_note_id!==FALSE) {
