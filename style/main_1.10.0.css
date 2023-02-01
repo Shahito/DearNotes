@@ -327,7 +327,7 @@ span.color-brush[visible="false"] {
                 opacity 0.25s,
                 translate 0s 0.25s!important;
 }
-span.color-brush[visible="false"]:not(#black-brush,#white-brush) {
+span.color-brush[visible="false"]:not(#black-brush,#grey-brush,#white-brush) {
     translate: -50% -50%!important;
 }
 span.color-brush[visible="true"] {
