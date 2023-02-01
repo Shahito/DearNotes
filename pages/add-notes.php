@@ -56,6 +56,7 @@ mysqli_close($conn);
 
                     <span id="selected-brush" rnb="false"></span>
                     <span id="black-brush" class="color-brush" visible="false" color="#000" selected></span>
+                    <span id="grey-brush" class="color-brush" visible="false" color="#888"></span>
                     <span id="white-brush" class="color-brush" visible="false" color="#fff"></span>
                     <span id="red-brush" class="color-brush" visible="false" color="#f00"></span>
                     <span id="orange-brush" class="color-brush" visible="false" color="#f80"></span>
