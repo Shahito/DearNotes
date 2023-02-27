@@ -17,16 +17,19 @@ function get_db_conn() {
 }
 
 function is_login() {
+    $conn=get_db_conn();
     if(isset($_SESSION['user_id']) and $_SESSION['user_id']!=FALSE) {
         // valid php session
+        update_last_seen_date_in_db($conn,$_SESSION['user_id']);
+        mysqli_close($conn);
         return TRUE;
     }
-    $conn=get_db_conn();
     $user_id=has_valid_login_cookie($conn);
     if($user_id!=FALSE) {
         // valid login cookie
         $_SESSION['user_id']=$user_id;
         set_login_cookie($conn,$user_id);
+        update_last_seen_date_in_db($conn,$user_id);
         mysqli_close($conn);
         return TRUE;
     }
@@ -56,6 +59,14 @@ function set_login_cookie($conn,$user_id) {
     WHERE `".USERS_ID."`=?";
     $query_update=$conn->prepare($query);
     $query_update->bind_param("ss",$new_token,$user_id);
+    $query_update->execute() or die(ERROR_DB_MESSAGE);
+}
+function update_last_seen_date_in_db($conn,$user_id) {
+    $query="UPDATE `".USERS_TABLE."`
+    SET `".USERS_LAST_SEEN."`=?
+    WHERE `".USERS_ID."`=?";
+    $query_update=$conn->prepare($query);
+    $query_update->bind_param("ss",new DateTime('now'),$user_id);
     $query_update->execute() or die(ERROR_DB_MESSAGE);
 }
 
