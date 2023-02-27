@@ -63,10 +63,10 @@ function set_login_cookie($conn,$user_id) {
 }
 function update_last_seen_date_in_db($conn,$user_id) {
     $query="UPDATE `".USERS_TABLE."`
-    SET `".USERS_LAST_SEEN."`=?
+    SET `".USERS_LAST_SEEN."`=NOW()
     WHERE `".USERS_ID."`=?";
     $query_update=$conn->prepare($query);
-    $query_update->bind_param("ss",new DateTime('now'),$user_id);
+    $query_update->bind_param("s",$user_id);
     $query_update->execute() or die(ERROR_DB_MESSAGE);
 }
 
