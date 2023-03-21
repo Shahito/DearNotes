@@ -74,7 +74,7 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
                     echo "<div class='shadow'></div><div class='spotlight'></div></div>";
                 }
             } else {
-                echo "<div style='width:100%;height:100%;display:flex;justify-content:center;align-items:center;text-align:center;'>Donnée indisponible.<br/>Base de données en maintenance pour une durée indertiminée.</div>";
+                echo "<div style='width:100%;height:100%;display:flex;justify-content:center;align-items:center;text-align:center;'>Donnée indisponible.<br/>Base de données en maintenance pour une durée indéterminée.</div>";
                 // $random_note_data=get_today_random_note_data($conn);
                 // if($random_note_data!=FALSE) {
                 //     echo "<div class='memories-suggestion'>";
