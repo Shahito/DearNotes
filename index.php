@@ -74,24 +74,25 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
                     echo "<div class='shadow'></div><div class='spotlight'></div></div>";
                 }
             } else {
-                $random_note_data=get_today_random_note_data($conn);
-                if($random_note_data!=FALSE) {
-                    echo "<div class='memories-suggestion'>";
-                    echo "<button id='memories-reveal' onClick='display_random_notes()'>";
-                    echo "<img src='./ressources/crying-peach-endless.gif' alt='Gif de Goma qui console Peach (mochi cat)'/>";
-                    echo "Voir un souvenir aléatoire</button>";
-                    echo "<span class='memories-title'>Le souvenir d'aujourd'hui</span>";
-                    echo "<div class='notes loaded'>";
-                    echo "<img src='".$random_note_data[SAVED_NOTES_DATA]."' alt='Note'/>";
-                    echo "<span>Créée le ".get_formatted_date_from_date($random_note_data[SAVED_NOTES_DATE])."</span>";
-                    echo "<div class='shadow'></div><div class='spotlight'></div></div></div>";
-                } else {
-                    echo "<div class='memories-suggestion'>";
-                    echo "<button id='memories-reveal' class='no-memories'>";
-                    echo "<img src='./ressources/crying-pillow-peach-endless.gif' alt='Gif de Peach qui pleure contre un oreiller (mochi cat)'/>";
-                    echo "Aucune note archivée</button>";
-                    echo "</div";
-                }
+                echo "<div style='width:100%;height:100%;display:flex;justify-content:center;align-items:center;text-align:center;'>Donnée indisponible.<br/>Base de données en maintenance pour une durée indertiminée.</div>";
+                // $random_note_data=get_today_random_note_data($conn);
+                // if($random_note_data!=FALSE) {
+                //     echo "<div class='memories-suggestion'>";
+                //     echo "<button id='memories-reveal' onClick='display_random_notes()'>";
+                //     echo "<img src='./ressources/crying-peach-endless.gif' alt='Gif de Goma qui console Peach (mochi cat)'/>";
+                //     echo "Voir un souvenir aléatoire</button>";
+                //     echo "<span class='memories-title'>Le souvenir d'aujourd'hui</span>";
+                //     echo "<div class='notes loaded'>";
+                //     echo "<img src='".$random_note_data[SAVED_NOTES_DATA]."' alt='Note'/>";
+                //     echo "<span>Créée le ".get_formatted_date_from_date($random_note_data[SAVED_NOTES_DATE])."</span>";
+                //     echo "<div class='shadow'></div><div class='spotlight'></div></div></div>";
+                // } else {
+                //     echo "<div class='memories-suggestion'>";
+                //     echo "<button id='memories-reveal' class='no-memories'>";
+                //     echo "<img src='./ressources/crying-pillow-peach-endless.gif' alt='Gif de Peach qui pleure contre un oreiller (mochi cat)'/>";
+                //     echo "Aucune note archivée</button>";
+                //     echo "</div";
+                // }
             }
             mysqli_close($conn);
             ?>
