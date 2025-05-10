@@ -35,6 +35,14 @@ mysqli_close($conn);
                             <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
                         </svg>
                     </span>
+                    <div class="undo-command">
+                        <span id="undo-btn" class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4L288 214.3V256v41.7L459.5 440.6zM256 352V256 128 96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160C4.2 237.5 0 246.5 0 256s4.2 18.5 11.5 24.6l192 160c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V352z"></path></svg>
+                        </span>
+                        <span id="redo-btn" class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="rotate: 180deg;" viewBox="0 0 512 512"><path d="M459.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4L288 214.3V256v41.7L459.5 440.6zM256 352V256 128 96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160C4.2 237.5 0 246.5 0 256s4.2 18.5 11.5 24.6l192 160c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V352z"></path></svg>
+                        </span>
+                    </div>
                     <span id="save-btn" class="btn">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" alt="Icone de coche, valider">
                             <path d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
@@ -64,7 +72,7 @@ mysqli_close($conn);
                     <span id="green-brush" class="color-brush" visible="false" color="#0f0"></span>
                     <span id="cyan-brush" class="color-brush" visible="false" color="#0ff"></span>
                     <span id="blue-brush" class="color-brush" visible="false" color="#00f"></span>
-                    <span id="rainbow-brush" class="color-brush" visible="false" color="rnb"></span>
+                    <!-- <span id="rainbow-brush" class="color-brush" visible="false" color="rnb"></span> -->
                 </div>
             </div>
             <form id="form-post-notes" action="../tools/add-notes" method="POST">
