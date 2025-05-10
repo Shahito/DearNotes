@@ -34,7 +34,6 @@ function initCanvas() {
 initCanvas();
 
 // Utils
-
 function getCanvasPos(e) {
     const rect = canvas.getBoundingClientRect();
     let touch = e.touches?.[0] || e.changedTouches?.[0] || e;
