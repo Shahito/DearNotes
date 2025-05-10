@@ -9,7 +9,7 @@ mysqli_close($conn);
 <html lang='fr'>
     <head>
         <title><?php echo SITE_NAME;?> - Nouveau mot</title>
-        <link rel="stylesheet" href="../style/main_1.10.0.css"/>
+        <link rel="stylesheet" href="../style/main_1.10.0.css?v=20250510"/>
         <link href="../ressources/tab-icon.svg" rel="icon"/>
         <link href="../ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
@@ -82,7 +82,7 @@ mysqli_close($conn);
         <div id="transition-bg"></div>
         <footer></footer>
     </body>
-    <script src="../tools/draw.js"></script>
+    <script src="../tools/draw.js?v=20250510"></script>
     <script src="../tools/page-transition.js"></script>
     <script>
         /* Prevent animation on load */
