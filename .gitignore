@@ -1,2 +1,10 @@
 .htaccess
 debug_mode.php
+
+# Ignorer le fichier .env dans config/
+config/.env
+
+# (optionnel) Autres fichiers sensibles ou temporaires :
+.env
+*.env
+*.log
