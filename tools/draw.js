@@ -47,19 +47,21 @@ function getCanvasPos(e) {
 
 let color_indicator = document.getElementById("selected-brush");
 color_indicator.addEventListener("click", () => {
-    let brush_selectors = document.querySelectorAll("#draw-palette span.color-brush");
+    let brush_selectors = document.querySelectorAll("#color-palette span.color-brush");
     brush_selectors.forEach(brush => {
         if (brush.getAttribute("visible") === "false") {
+            document.querySelector("#color-palette").setAttribute("visible", "true");
             brush.setAttribute("visible", "true");
             canvas.setAttribute("palette-open", "true");
         } else {
+            document.querySelector("#color-palette").setAttribute("visible", "false");
             brush.setAttribute("visible", "false");
             canvas.setAttribute("palette-open", "false");
         }
     });
 });
 
-const brush_selectors = document.querySelectorAll("#draw-palette span.color-brush,#eraser-brush");
+const brush_selectors = document.querySelectorAll("#color-palette span.color-brush,#eraser-brush");
 brush_selectors.forEach(brush => {
     brush.addEventListener("click", () => {
         brush_selectors.forEach((el) => { el.removeAttribute("selected"); });
@@ -71,6 +73,7 @@ brush_selectors.forEach(brush => {
             _.setAttribute("visible", "false");
         });
         canvas.setAttribute("palette-open", "false");
+        document.querySelector("#color-palette").setAttribute("visible", "false");
         if (color === "eraser") {
             currentColor = config.clearColor;
         } else {

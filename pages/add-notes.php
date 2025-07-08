@@ -9,7 +9,7 @@ mysqli_close($conn);
 <html lang='fr'>
     <head>
         <title><?php echo SITE_NAME;?> - Nouveau mot</title>
-        <link rel="stylesheet" href="../style/main_1.10.0.css?v=20250510"/>
+        <link rel="stylesheet" href="../style/main_1.10.0.css?v=20250808"/>
         <link href="../ressources/tab-icon.svg" rel="icon"/>
         <link href="../ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
@@ -63,15 +63,31 @@ mysqli_close($conn);
                     </div>
 
                     <span id="selected-brush" rnb="false"></span>
-                    <span id="black-brush" class="color-brush" visible="false" color="#000" selected></span>
+                </div>
+                <div id="color-palette">
+                <span id="white-brush" class="color-brush" visible="false" color="#fff"></span>
                     <span id="grey-brush" class="color-brush" visible="false" color="#888"></span>
-                    <span id="white-brush" class="color-brush" visible="false" color="#fff"></span>
-                    <span id="red-brush" class="color-brush" visible="false" color="#f00"></span>
-                    <span id="orange-brush" class="color-brush" visible="false" color="#f80"></span>
+                    <span id="black-brush" class="color-brush" visible="false" color="#000" selected></span>
+
+                    <span id="light-red-brush" class="color-brush" visible="false" color="#ff9999"></span>
+                    <span id="red-brush" class="color-brush" visible="false" color="#ff4d4d"></span>
+                    <span id="dark-red-brush" class="color-brush" visible="false" color="#cc3333"></span>
+
+                    <span id="light-orange-brush" class="color-brush" visible="false" color="#ffcc80"></span>
+                    <span id="orange-brush" class="color-brush" visible="false" color="#ff9900"></span>
+                    <span id="dark-orange-brush" class="color-brush" visible="false" color="#cc7a00"></span>
+
+                    <span id="light-pink-brush" class="color-brush" visible="false" color="#ffaad6"></span>
                     <span id="pink-brush" class="color-brush" visible="false" color="#fe80c9"></span>
-                    <span id="green-brush" class="color-brush" visible="false" color="#0f0"></span>
-                    <span id="cyan-brush" class="color-brush" visible="false" color="#0ff"></span>
-                    <span id="blue-brush" class="color-brush" visible="false" color="#00f"></span>
+                    <span id="dark-pink-brush" class="color-brush" visible="false" color="#b34785"></span>
+
+                    <span id="light-green-brush" class="color-brush" visible="false" color="#99e6b3"></span>
+                    <span id="green-brush" class="color-brush" visible="false" color="#00cc44"></span>
+                    <span id="dark-green-brush" class="color-brush" visible="false" color="#33995c"></span>
+
+                    <span id="light-blue-brush" class="color-brush" visible="false" color="#99b3ff"></span>
+                    <span id="blue-brush" class="color-brush" visible="false" color="#3366ff"></span>
+                    <span id="dark-blue-brush" class="color-brush" visible="false" color="#3344aa"></span>
                     <!-- <span id="rainbow-brush" class="color-brush" visible="false" color="rnb"></span> -->
                 </div>
             </div>
@@ -82,8 +98,16 @@ mysqli_close($conn);
         <div id="transition-bg"></div>
         <footer></footer>
     </body>
-    <script src="../tools/draw.js?v=20250510"></script>
+    <script src="../tools/draw.js?v=20250808"></script>
     <script src="../tools/page-transition.js"></script>
+<script>
+  document.querySelectorAll('.color-brush').forEach(colorBrush => {
+    const color = colorBrush.getAttribute('color');
+    if (color) {
+        colorBrush.style.backgroundColor = color;
+    }
+  });
+</script>
     <script>
         /* Prevent animation on load */
         setTimeout(function() {
