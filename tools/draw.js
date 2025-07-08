@@ -2,7 +2,7 @@
 const config = {
     canvasId: 'draw-box',
     brushIds: ['brush-size-1', 'brush-size-2', 'brush-size-3', 'brush-size-4'],
-    brushSizes: [2, 5, 20, 50],
+    brushSizes: [2, 5, 25, 50],
     colorButtonClass: 'color-brush',
     undoButtonId: 'undo-btn',
     redoButtonId: 'redo-btn',

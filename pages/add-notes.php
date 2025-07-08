@@ -98,7 +98,7 @@ mysqli_close($conn);
         <div id="transition-bg"></div>
         <footer></footer>
     </body>
-    <script src="../tools/draw.js?v=20250808"></script>
+    <script src="../tools/draw.js?v=202508082"></script>
     <script src="../tools/page-transition.js"></script>
 <script>
   document.querySelectorAll('.color-brush').forEach(colorBrush => {
