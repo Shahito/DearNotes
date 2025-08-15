@@ -8,7 +8,7 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
 <html lang='fr'>
     <head>
         <title><?php echo SITE_NAME;?> - Accueil</title>
-        <link rel="stylesheet" href="./style/main_1.10.0.css"/>
+        <link rel="stylesheet" href="./style/main_1.10.0.css?v=1.13.1-2"/>
         <link href="./ressources/tab-icon.svg" rel="icon"/>
         <link href="./ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
@@ -58,6 +58,7 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
             </div>
         </header>
         <main id="home">
+        <div id='notes-trigger'></div>
             <?php
             if(isset($_GET['successful-link']) && $_GET['successful-link']==1) {
                 echo "<div class='success-message'>".SUCCESS_LINK_MESSAGE."</div>";
@@ -70,7 +71,7 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
             if($notes->fetch_assoc()!=NULL) {
                 foreach($notes as $note) {
                     echo "<div class='notes'><img src='".$note[LIVE_NOTES_DATA]."' alt='Note'/>";
-                    echo "<span>Temps restant : ".get_formatted_left_time_from_date($note[LIVE_NOTES_DATE])."</span>";
+                    echo "<span style='visibility: hidden;'>Temps restant : ".get_formatted_left_time_from_date($note[LIVE_NOTES_DATE])."</span>";
                     echo "<div class='shadow'></div><div class='spotlight'></div></div>";
                 }
             } else {
@@ -82,7 +83,7 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
                     echo "<img src='./ressources/crying-peach-endless.gif' alt='Gif de Goma qui console Peach (mochi cat)'/>";
                     echo "Voir un souvenir aléatoire</button>";
                     echo "<span class='memories-title'>Le souvenir d'aujourd'hui</span>";
-                    echo "<div class='notes loaded'>";
+                    echo "<div class='notes memory-notes loaded'>";
                     echo "<img src='".$random_note_data[SAVED_NOTES_DATA]."' alt='Note'/>";
                     echo "<span>Créée le ".get_formatted_date_from_date($random_note_data[SAVED_NOTES_DATE])."</span>";
                     echo "<div class='shadow'></div><div class='spotlight'></div></div></div>";
@@ -108,6 +109,15 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
         setTimeout(function() {
             document.body.className="";
         },500);
+        // Init
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                // Avoid blinky lags during page loading
+                document.querySelectorAll('div.notes span').forEach(notesSpan => {
+                    notesSpan.style.visibility = 'visible';
+                });
+            }, 1000);
+        });
     </script>
     <script src="./tools/page-transition.js"></script>
     <script>
@@ -115,6 +125,23 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
             let random_note_container=document.querySelector("div.memories-suggestion");
             random_note_container.setAttribute("drawn","");
         }
+    </script>
+    <script>
+        const allNotes = document.querySelectorAll('div.notes');
+        const notesTrigger = document.getElementById("notes-trigger");
+        allNotes.forEach(note => {
+            if(note.classList.contains('memory-notes')) return;
+            note.addEventListener('click', () => {
+                note.classList.add('focused');
+                notesTrigger.classList.add('active');
+            });
+        });
+        notesTrigger.addEventListener("click", () => {
+            allNotes.forEach(note => {
+                note.classList.remove('focused');
+                notesTrigger.classList.remove('active');
+            });
+        });
     </script>
     <?php
         if($redirect_link) {
