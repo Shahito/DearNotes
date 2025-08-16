@@ -431,6 +431,7 @@ div.notes.focused {
     top: calc(50% - 10rem) !important;
     left: calc(50% - 10rem) !important;
     rotate: 0deg !important;
+    scale: 1.25;
     z-index: 2;
 }
 
