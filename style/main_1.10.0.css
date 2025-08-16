@@ -424,7 +424,7 @@ div.notes {
         left var(--transition-speed) ease,
         translate var(--transition-speed) ease,
         rotate var(--transition-speed) ease,
-        scale var(--transition-speed) ease-out;
+        scale var(--transition-speed) ease var(--transition-speed);
 }
 
 div.notes.focused {
@@ -433,6 +433,12 @@ div.notes.focused {
     rotate: 0deg !important;
     scale: 1.2;
     z-index: 2;
+    transition:
+        top var(--transition-speed) ease var(--fast-transition-speed),
+        left var(--transition-speed) ease var(--fast-transition-speed),
+        translate var(--transition-speed) ease var(--fast-transition-speed),
+        rotate var(--transition-speed) ease var(--fast-transition-speed),
+        scale var(--transition-speed) ease;
 }
 
 #notes-trigger {
@@ -452,17 +458,22 @@ div.notes.focused {
     background: var(--theme-shadow-transparent);
 }
 
+div.notes::after,
+div.notes div.shadow {
+    transition: opacity var(--fast-transition-speed) ease-in var(--transition-speed);
+}
+
+div.notes.focused::after,
+div.notes.focused div.shadow {
+    transition: opacity var(--fast-transition-speed) ease-out;
+}
+
 div.notes.focused::after {
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 div.notes.focused div.shadow {
     opacity: 0.2;
-}
-
-div.notes::after,
-div.notes div.shadow {
-    transition: opacity 300ms ease;
 }
 
 div.notes.loaded {
