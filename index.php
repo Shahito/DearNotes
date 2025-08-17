@@ -8,7 +8,7 @@ $redirect_link=!has_link_in_db($conn,$_SESSION['user_id']);
 <html lang='fr'>
     <head>
         <title><?php echo SITE_NAME;?> - Accueil</title>
-        <link rel="stylesheet" href="./style/main_1.10.0.css?v=1.13.1-3."/>
+        <link rel="stylesheet" href="./style/main_1.10.0.css?v=1.14.1-1"/>
         <link href="./ressources/tab-icon.svg" rel="icon"/>
         <link href="./ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">

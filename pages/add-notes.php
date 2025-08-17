@@ -9,7 +9,7 @@ mysqli_close($conn);
 <html lang='fr'>
     <head>
         <title><?php echo SITE_NAME;?> - Nouveau mot</title>
-        <link rel="stylesheet" href="../style/main_1.10.0.css?v=20250808"/>
+        <link rel="stylesheet" href="../style/main_1.10.0.css?v=1.14.1-1"/>
         <link href="../ressources/tab-icon.svg" rel="icon"/>
         <link href="../ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
@@ -21,7 +21,8 @@ mysqli_close($conn);
     </head>
     <body id="notes-body" draggable="false" class="preload" style="overscroll-behavior-y: contain;">
         <header>
-            <div id="bubble-action-home" class="bubble-action" onClick="goWithTransition('../',0)">
+            <div id="bubble-action-home" class="bubble-action" onClick="
+if (confirm('Es-tu sûr de vouloir quitter la page ?\nLa note en cours sera perdue. 🍃')) { protectionActive = false;goWithTransition('../',0) }">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" alt="Icone de retour au menu">
                     <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
                 </svg>
@@ -98,16 +99,16 @@ mysqli_close($conn);
         <div id="transition-bg"></div>
         <footer></footer>
     </body>
-    <script src="../tools/draw.js?v=202508082"></script>
+    <script src="../tools/draw.js?v=1.14.1-1"></script>
     <script src="../tools/page-transition.js"></script>
-<script>
-  document.querySelectorAll('.color-brush').forEach(colorBrush => {
-    const color = colorBrush.getAttribute('color');
-    if (color) {
-        colorBrush.style.backgroundColor = color;
-    }
-  });
-</script>
+    <script>
+    document.querySelectorAll('.color-brush').forEach(colorBrush => {
+        const color = colorBrush.getAttribute('color');
+        if (color) {
+            colorBrush.style.backgroundColor = color;
+        }
+    });
+    </script>
     <script>
         /* Prevent animation on load */
         setTimeout(function() {

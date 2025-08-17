@@ -23,6 +23,10 @@ let redoStack = [];
 let lastPos = null;
 let moved = false;
 
+let protectionActive = true;
+
+window.addEventListener("beforeunload", (e) => protectBrowserUndo(e));
+
 // Utilise les dimensions CSS réelles du canvas
 function initCanvas() {
     canvas.width = canvas.offsetWidth;
@@ -101,15 +105,25 @@ function updateUndoRedoButtons() {
     }
 }
 
+function protectBrowserUndo(e) {
+    if (protectionActive) {
+        e.preventDefault();
+        e.returnValue = "";
+    }
+}
+
 function save(e) {
-    let dataURL = canvas.toDataURL();
-    let form = document.getElementById("form-post-notes");
-    let data_input = document.getElementById("data-img");
-    e.preventDefault();
-    let transition_bg = document.getElementById("transition-bg");
-    transition_bg.setAttribute("active-bg0", "true");
-    data_input.value = dataURL;
-    form.submit();
+    if (confirm("Es-tu sûr de vouloir envoyer la note ? 💌\nLes notes envoyées ne peuvent plus être modifiées.")) {
+        protectionActive = false;
+        let dataURL = canvas.toDataURL();
+        let form = document.getElementById("form-post-notes");
+        let data_input = document.getElementById("data-img");
+        e.preventDefault();
+        let transition_bg = document.getElementById("transition-bg");
+        transition_bg.setAttribute("active-bg0", "true");
+        data_input.value = dataURL;
+        form.submit();
+    }
 }
 
 function saveState() {
@@ -146,12 +160,15 @@ function redo() {
 }
 
 function clearCanvas() {
-    saveState();
-    ctx.fillStyle = config.clearColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if (confirm("Es-tu sûr de vouloir effacer la note ? 🧽")) {
+        saveState();
+        ctx.fillStyle = config.clearColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 }
 
 function startDrawing(e) {
+    e.preventDefault();
     drawing = true;
     lastPos = getCanvasPos(e);
     moved = false;
@@ -160,7 +177,7 @@ function startDrawing(e) {
     saveState();
 }
 
-function stopDrawing() {
+function stopDrawing(e) {
     if (!moved && lastPos) {
         ctx.beginPath();
         ctx.arc(lastPos.x, lastPos.y, currentBrushSize / 2, 0, Math.PI * 2);
@@ -171,28 +188,18 @@ function stopDrawing() {
     lastPos = null;
 }
 
-// Événements Canvas
-canvas.addEventListener('mousedown', (e) => startDrawing(e));
-canvas.addEventListener('touchstart', (e) => startDrawing(e), { passive: false });
+function draw(e) {
+    e.preventDefault();
+    if (!drawing) return;
 
-canvas.addEventListener('mousemove', (e) => {
-    if (!drawing) return;
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.strokeStyle = currentColor;
-    ctx.lineWidth = currentBrushSize;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.stroke();
-});
-canvas.addEventListener('touchmove', (e) => {
-    if (!drawing) return;
+    moved = true;
     const pos = getCanvasPos(e);
 
     const dx = pos.x - lastPos.x;
     const dy = pos.y - lastPos.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    const steps = Math.floor(distance / 1); // Plus petit pour fluidité (touchmove)
+    const steps = Math.floor(distance / 0.2); // Smaller, smoother (touch)
 
     for (let i = 0; i < steps; i++) {
         const x = lastPos.x + (dx * i) / steps;
@@ -210,14 +217,22 @@ canvas.addEventListener('touchmove', (e) => {
     lastPos = pos;
 
     if (e.cancelable) e.preventDefault();
-}, { passive: false });
+}
 
-canvas.addEventListener('mouseup', stopDrawing);
-canvas.addEventListener('touchend', stopDrawing, { passive: false });
-canvas.addEventListener('mouseleave', stopDrawing);
-canvas.addEventListener('touchcancel', stopDrawing, { passive: false });
+// Canvas events
+canvas.addEventListener('pointerdown', (e) => startDrawing(e), { passive: false });
 
-// Gestion des brush
+canvas.addEventListener('pointermove', (e) => draw(e), { passive: false });
+
+canvas.addEventListener('pointerup', (e) => stopDrawing(e), { passive: false });
+canvas.addEventListener('pointercancel', (e) => stopDrawing(e), { passive: false });
+canvas.addEventListener('pointerleave', (e) => stopDrawing(e));
+
+canvas.addEventListener('contextmenu', e => { // Prevent right-click on canvas
+    e.preventDefault();
+});
+
+// Brushs
 config.brushIds.forEach((id, index) => {
     const btn = document.getElementById(id);
     if (btn) {
@@ -231,14 +246,14 @@ config.brushIds.forEach((id, index) => {
     }
 });
 
-// Boutons undo/redo/clear
+// Undo/redo/clear buttons
 document.getElementById(config.undoButtonId)?.addEventListener('click', undo);
 document.getElementById(config.redoButtonId)?.addEventListener('click', redo);
 document.getElementById(config.clearButtonId)?.addEventListener('click', clearCanvas);
 document.getElementById(config.saveButtonId)?.addEventListener('click', save);
 
-// Resize & redraw on resize (optionnel)
+// Resize & redraw on resize (optional)
 window.addEventListener('resize', () => {
-    // Recalculer la taille du canvas au redimensionnement
+    // Calculate canvas size when resizing
     initCanvas();
 });
