@@ -10,8 +10,7 @@
 
     --bg-primary: #77d;
     --bg-secondary: #F3F293;
-    /* was too green */
-    /*--bg-secondary: #dd7;*/
+
     --bg-btn: #DED337;
 
     --theme-primary: #ffe3c2;
@@ -226,7 +225,7 @@ div#canvas-command span#save-btn {
     width: 1rem;
     height: 1rem;
     font-size: 1rem;
-    margin: 0 1rem;
+    margin: 0 0.5rem;
 }
 
 div#canvas-command span svg,
@@ -249,7 +248,7 @@ div#draw-palette span {
 
 div#draw-palette #eraser-brush,
 div#draw-palette #selected-brush {
-    margin: 0 1rem;
+    margin: 0 0.5rem;
 }
 
 div#brush-size-selector span[selected] span.icon-round-brush {
@@ -268,7 +267,7 @@ span#eraser-brush[selected] {
 
 div#canvas-command {
     justify-content: space-between;
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 0.5rem 0.5rem 0 0;
 }
 
 div.undo-command {
@@ -288,7 +287,7 @@ span.inactive-btn {
 div#draw-palette {
     justify-content: space-between;
     gap: 1.2rem;
-    border-radius: 0 0 1rem 1rem;
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 #brush-size-selector {
@@ -328,16 +327,6 @@ span#selected-brush {
     border-radius: 0.25rem;
 }
 
-/* span#selected-brush[rnb="true"] {
-    background: linear-gradient(135deg, #f00 10%, #f80 30%, #ff0 40%, #0f0 50%, #0ff 60%, #08f 70%, #00f 90%);
-} */
-
-span.color-brush {
-    width: calc(var(--canvas-size) * 0.09);
-    height: calc(var(--canvas-size) * 0.09);
-    border-radius: 0.3rem;
-}
-
 span.color-brush[visible="false"] {
     opacity: 0;
     pointer-events: none;
@@ -349,16 +338,50 @@ span.color-brush[visible="true"] {
 
 canvas[palette-open="true"] {
     pointer-events: none;
-    filter: brightness(0.5) grayscale(0.75) blur(2px);
     overflow: hidden;
 }
 
 #color-palette {
     position: absolute;
     display: none;
+    grid-template-rows: repeat(3, 1fr);
     grid-auto-flow: column;
-    grid-template-rows: repeat(3, auto);
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    width: calc(var(--canvas-size) - 2rem);
+    margin: 0 1rem;
+    height: auto;
+    background: var(--theme-primary);
+    border: 2px solid var(--theme-secondary);
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+#color-palette-backdrop {
+    position: absolute;
+    display: none;
+    width: var(--canvas-size);
+    height: var(--canvas-size);
+    background-color: var(--theme-shadow-transparent);
+    backdrop-filter: blur(2px);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    pointer-events: none;
+}
+
+#color-palette[visible="true"]+#color-palette-backdrop {
+    display: flex;
+}
+
+span.color-brush {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+    border-radius: 20%;
+    cursor: pointer;
+    transition: transform 0.2s, border 0.2s;
 }
 
 #color-palette[visible="false"] {
@@ -371,42 +394,6 @@ canvas[palette-open="true"] {
 
 div.canvas-wrapper {
     overflow: hidden;
-}
-
-/* span#black-brush {
-    background: #000;
-}
-
-span#grey-brush {
-    background: #888;
-}
-
-span#white-brush {
-    background: #fff;
-}
-
-span#red-brush {
-    background: #f00;
-}
-
-span#orange-brush {
-    background: #f80;
-}
-
-span#pink-brush {
-    background: #fe80c9;
-}
-
-span#green-brush {
-    background: #0f0;
-}
-
-span#blue-brush {
-    background: #00f;
-}
-
-span#rainbow-brush {
-    background: linear-gradient(135deg, #f00 10%, #f80 30%, #ff0 40%, #0f0 50%, #0ff 60%, #08f 70%, #00f 90%);
 }
 
 /* live notes style */

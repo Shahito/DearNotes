@@ -9,7 +9,7 @@ mysqli_close($conn);
 <html lang='fr'>
     <head>
         <title><?php echo SITE_NAME;?> - Nouveau mot</title>
-        <link rel="stylesheet" href="../style/main_1.10.0.css?v=1.14.1-1"/>
+        <link rel="stylesheet" href="../style/main_1.10.0.css?v=1.14.3-1"/>
         <link href="../ressources/tab-icon.svg" rel="icon"/>
         <link href="../ressources/tab-icon.svg" rel="shortcut icon" type="image/x-icon">
         <meta name="theme-color" content="#333">
@@ -66,10 +66,6 @@ if (confirm('Es-tu sûr de vouloir quitter la page ?\nLa note en cours sera perd
                     <span id="selected-brush" rnb="false"></span>
                 </div>
                 <div id="color-palette">
-                <span id="white-brush" class="color-brush" visible="false" color="#fff"></span>
-                    <span id="grey-brush" class="color-brush" visible="false" color="#888"></span>
-                    <span id="black-brush" class="color-brush" visible="false" color="#000" selected></span>
-
                     <span id="light-red-brush" class="color-brush" visible="false" color="#ff9999"></span>
                     <span id="red-brush" class="color-brush" visible="false" color="#ff4d4d"></span>
                     <span id="dark-red-brush" class="color-brush" visible="false" color="#cc3333"></span>
@@ -89,8 +85,16 @@ if (confirm('Es-tu sûr de vouloir quitter la page ?\nLa note en cours sera perd
                     <span id="light-blue-brush" class="color-brush" visible="false" color="#99b3ff"></span>
                     <span id="blue-brush" class="color-brush" visible="false" color="#3366ff"></span>
                     <span id="dark-blue-brush" class="color-brush" visible="false" color="#3344aa"></span>
-                    <!-- <span id="rainbow-brush" class="color-brush" visible="false" color="rnb"></span> -->
+
+                    <span id="light-brown-brush" class="color-brush" visible="false" color="#A86B4B"></span>
+                    <span id="brown-brush" class="color-brush" visible="false" color="#5A2D14"></span>
+                    <span id="dark-brown-brush" class="color-brush" visible="false" color="#3B1605"></span>
+
+                    <span id="white-brush" class="color-brush" visible="false" color="#fff"></span>
+                    <span id="grey-brush" class="color-brush" visible="false" color="#888"></span>
+                    <span id="black-brush" class="color-brush" visible="false" color="#000" selected></span>
                 </div>
+                <div id="color-palette-backdrop"></div>
             </div>
             <form id="form-post-notes" action="../tools/add-notes" method="POST">
                 <input type="hidden" id="data-img" name="data-img" value=""/>
