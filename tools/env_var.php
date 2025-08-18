@@ -10,7 +10,7 @@ if(DEBUG_MODE) {
     error_reporting(E_ALL);
 
     // Files
-    define("ROOT","/far-sticky-love");
+    define("ROOT","/dear-notes");
 } else {
     // Files
     define("ROOT","");
@@ -23,7 +23,7 @@ define("DBPASSWORD",$env['DB_PASS']);
 define("DBNAME",$env['DB_NAME']);
 
 // General
-define("SITE_NAME","FarStickyLove");
+define("SITE_NAME","DearNotes");
 
 define("SALT_SIZE",10); // 10 bytes->bin2hex = 20 chars
 define("PASSWORD_PEPPER",$env['PASSWORD_PEPPER']);
