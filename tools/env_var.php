@@ -10,7 +10,7 @@ if(DEBUG_MODE) {
     error_reporting(E_ALL);
 
     // Files
-    define("ROOT","/dear-notes");
+    define("ROOT","/DearNotes");
 } else {
     // Files
     define("ROOT","");
