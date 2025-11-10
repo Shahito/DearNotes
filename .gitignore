@@ -2,7 +2,6 @@
 debug_mode.php
 .env
 *.env
-.env.*        # au cas où tu as des .env.local, .env.dev, etc.
 config/.env   # protège spécifiquement ton dossier config
 
 # Cache / logs
