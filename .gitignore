@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 node_modules
 .env
 /src/generated/prisma
@@ -15,3 +16,17 @@ Thumbs.db
 dist/
 build/
 .cache/
+=======
+.htaccess
+debug_mode.php
+.env
+*.env
+config/.env
+
+# Cache / logs
+*.log
+*.cache
+*.tmp
+*.bak
+*.swp
+>>>>>>> 4806122bb81fc5f6c463dc65e047e864ae2db9e2
