@@ -1,0 +1,43 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id              Int       @id @default(autoincrement())
+  username        String    @unique
+  displayUsername String
+  password        String
+  createdAt       DateTime  @default(now())
+  lastActive      DateTime  @default(now())
+
+  coupleId        Int?
+  couple          Couple?   @relation("CoupleMembers", fields: [coupleId], references: [id])
+
+  notes           Note[]    @relation("UserNotes")   // <--- AJOUT
+}
+
+model Couple {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  inviteCode String   @unique
+  users     User[]   @relation("CoupleMembers")
+  notes     Note[]
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  coupleId  Int
+  authorId  Int
+  image     Bytes     @db.MediumBlob
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  isMemory  Boolean  @default(false)
+
+  author    User     @relation("UserNotes", fields: [authorId], references: [id]) // MATCH
+  couple    Couple   @relation(fields: [coupleId], references: [id])
+}

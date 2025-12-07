@@ -1,0 +1,114 @@
+<!-- public/write.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>DearNotes - Dessiner une note</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="/images/tab/tab-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+  <header>
+    <nav id="menu" class="closed">
+      <a href="board.html"><button>Nos notes</button></a>
+      <a href="settings.html"><button>Paramètres</button></a>
+      <button onclick="logout()">Déconnexion</button>
+    </nav>
+    <button id="menuTrigger" class="closed">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" alt="Icône menu">
+        <path d="M64 360c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zm0-160c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zM120 96c0 30.9-25.1 56-56 56S8 126.9 8 96S33.1 40 64 40s56 25.1 56 56z"></path>
+      </svg>
+    </button>
+  </header>
+    <main id="notes">
+        <div id="new-note-container">
+            <div id="canvas-command">
+                <span id="cancel-btn" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" alt="Icone de croix, annuler">
+                        <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+                    </svg>
+                </span>
+                <div class="undo-command">
+                    <span id="undo-btn" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4L288 214.3V256v41.7L459.5 440.6zM256 352V256 128 96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160C4.2 237.5 0 246.5 0 256s4.2 18.5 11.5 24.6l192 160c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V352z"></path></svg>
+                    </span>
+                    <span id="redo-btn" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="rotate: 180deg;" viewBox="0 0 512 512"><path d="M459.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4L288 214.3V256v41.7L459.5 440.6zM256 352V256 128 96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160C4.2 237.5 0 246.5 0 256s4.2 18.5 11.5 24.6l192 160c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V352z"></path></svg>
+                    </span>
+                </div>
+                <span id="save-btn" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" alt="Icone de coche, valider">
+                        <path d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                    </svg>
+                </span>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="draw-box" palette-open="false"></canvas>
+                <div id="color-palette">
+                <span id="light-red-brush" class="color-brush" visible="false" color="#ff9999"></span>
+                <span id="red-brush" class="color-brush" visible="false" color="#ff4d4d"></span>
+                <span id="dark-red-brush" class="color-brush" visible="false" color="#cc3333"></span>
+
+                <span id="light-orange-brush" class="color-brush" visible="false" color="#ffcc80"></span>
+                <span id="orange-brush" class="color-brush" visible="false" color="#ff9900"></span>
+                <span id="dark-orange-brush" class="color-brush" visible="false" color="#cc7a00"></span>
+
+                <span id="light-pink-brush" class="color-brush" visible="false" color="#ffaad6"></span>
+                <span id="pink-brush" class="color-brush" visible="false" color="#fe80c9"></span>
+                <span id="dark-pink-brush" class="color-brush" visible="false" color="#b34785"></span>
+
+                <span id="light-green-brush" class="color-brush" visible="false" color="#99e6b3"></span>
+                <span id="green-brush" class="color-brush" visible="false" color="#00cc44"></span>
+                <span id="dark-green-brush" class="color-brush" visible="false" color="#33995c"></span>
+
+                <span id="light-blue-brush" class="color-brush" visible="false" color="#99b3ff"></span>
+                <span id="blue-brush" class="color-brush" visible="false" color="#3366ff"></span>
+                <span id="dark-blue-brush" class="color-brush" visible="false" color="#3344aa"></span>
+
+                <span id="light-brown-brush" class="color-brush" visible="false" color="#A86B4B"></span>
+                <span id="brown-brush" class="color-brush" visible="false" color="#5A2D14"></span>
+                <span id="dark-brown-brush" class="color-brush" visible="false" color="#3B1605"></span>
+
+                <span id="white-brush" class="color-brush" visible="false" color="#fff"></span>
+                <span id="grey-brush" class="color-brush" visible="false" color="#888"></span>
+                <span id="black-brush" class="color-brush" visible="false" color="#000" selected></span>
+            </div>
+            <div id="color-palette-backdrop"></div>
+            </div>
+            <div id="draw-palette">
+                <span id="eraser-brush" color="eraser"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M290.7 57.4L57.4 290.7c-25 25-25 65.5 0 90.5l80 80c12 12 28.3 18.7 45.3 18.7H288h9.4H512c17.7 0 32-14.3 32-32s-14.3-32-32-32H387.9L518.6 285.3c25-25 25-65.5 0-90.5L381.3 57.4c-25-25-65.5-25-90.5 0zM297.4 416H288l-105.4 0-80-80L227.3 211.3 364.7 348.7 297.4 416z"/></svg></span>
+                
+                <div id="brush-size-selector">
+                    <span id="brush-size-1" class="brush-size-btn" size="2" selected><span class="icon-round-brush"></span></span>
+                    <span id="brush-size-2" class="brush-size-btn" size="10"><span class="icon-round-brush"></span></span>
+                    <span id="brush-size-3" class="brush-size-btn" size="20"><span class="icon-round-brush"></span></span>
+                    <span id="brush-size-4" class="brush-size-btn" size="100"><span class="icon-round-brush"></span></span>
+                </div>
+
+                <span id="selected-brush" rnb="false"></span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    document.querySelectorAll('.color-brush').forEach(colorBrush => {
+        const color = colorBrush.getAttribute('color');
+        if (color) {
+            colorBrush.style.backgroundColor = color;
+        }
+    });
+    </script>
+  <script src="js/app.js"></script>
+  <script src="js/write.js"></script>
+  <script src="js/menu.js"></script>
+  <script>
+    const documentHeight = () => {
+        const doc=document.documentElement
+        doc.style.setProperty('--real-vh', `${window.innerHeight}px`)
+    }
+    window.addEventListener('resize',documentHeight)
+    documentHeight()
+  </script>
+</body>
+</html>

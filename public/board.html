@@ -1,0 +1,57 @@
+<!-- public/board.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>DearNotes - Mur</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="/images/tab/tab-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+  <header>
+    <nav id="menu" class="closed">
+      <a href="write.html"><button>Ajouter une note</button></a>
+      <a href="settings.html"><button>Paramètres</button></a>
+      <button onclick="logout()">Déconnexion</button>
+    </nav>
+    <button id="menuTrigger" class="closed">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" alt="Icône menu">
+        <path d="M64 360c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zm0-160c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zM120 96c0 30.9-25.1 56-56 56S8 126.9 8 96S33.1 40 64 40s56 25.1 56 56z"></path>
+      </svg>
+    </button>
+  </header>
+  <main id="home">
+    <div id='notes-trigger'></div>
+    <div id="memory"></div>
+  </main>
+  <section id="coupleZone" class="hidden">
+    <h2>Couple</h2>
+    <form id="joinCoupleForm">
+      <input id="inviteCode" placeholder="Code d'invitation" required>
+      <button id="joinCoupleBtn" type='submit'>Rejoindre</button>
+    </form>
+    <div id="createCoupleSection">
+      <button id="createCoupleBtn">Créer un couple</button>
+      <p>*Créer un couple génère un code à partager.</p>
+    </div>
+    <div id="coupleInfo">
+      <p>Envoie ce code à ton partenaire pour rejointre votre couple :</p>
+      <p id="coupleCode"></p>
+      <button id="copyCoupleCode">Copier</button>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/menu.js"></script>
+  <script>
+    const documentHeight = () => {
+        const doc=document.documentElement
+        doc.style.setProperty('--real-vh', `${window.innerHeight}px`)
+    }
+    window.addEventListener('resize',documentHeight)
+    documentHeight()
+  </script>
+</body>
+</html>

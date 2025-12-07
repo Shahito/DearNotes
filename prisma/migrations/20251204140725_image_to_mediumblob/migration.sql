@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Note` MODIFY `image` MEDIUMBLOB NOT NULL;

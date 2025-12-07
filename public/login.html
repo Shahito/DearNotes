@@ -1,0 +1,106 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>DearNotes - Connexion</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="/images/tab/tab-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+  <main id="loginMain">
+    <div id="logoSection">
+      <img src="/images/logo/logo.png" alt="Logo DearNotes"/>
+      <h1>DearNotes</h1>
+    </div>
+    <div id="loginSection">
+      <h2>Connexion</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Nom d'utilisateur" autocomplete="name" required>
+        <div class="input-view-wrapper">
+          <input id="password" type="password" placeholder="Mot de passe"required>
+          <span id="toggle-password" class="view-toggle" tabindex="0"></span>
+        </div>
+        <p class="message">Nope nope</p>
+        <button type="submit">Se connecter</button>
+      </form>
+      <p id="registerSwitch" tabindex="0">Créer mon compte</p>
+    </div>
+
+    <div id="registerSection" class="hidden">
+      <h2>Inscription</h2>
+      <form id="registerForm">
+        <input id="usernameRegister" type="text" placeholder="Nom d'utilisateur" required>
+        <div class="input-view-wrapper">
+          <input id="passwordRegister" type="password" placeholder="Mot de passe" required>
+          <span id="toggle-passwordRegister" class="view-toggle" tabindex="0"></span>
+        </div>
+        <p class="message"></p>
+        <button type="submit">Créer un compte</button>
+      </form>
+      <p id="loginSwitch" tabindex="0">Se conencter</p>
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/form_switch.js"></script>
+  <script src="js/input_type_toggle.js"></script>
+  <script>
+    toggle("password");
+    toggle("passwordRegister");
+    document.getElementById("loginForm").addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      login();
+    });
+    document.getElementById("registerForm").addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      register();
+    });
+
+    const loginMessage = document.querySelector('#loginForm .message');
+    const registerMessage = document.querySelector('#registerForm .message');
+    
+    async function login() {
+      try {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const res = await api('/auth/login', {
+          method: 'POST',
+          body: { username, password }
+        });
+        if (res.success) window.location = '/board.html';
+      } catch (e) {
+        loginMessage.textContent = e.message;
+        loginMessage.classList.add('visible');
+        loginMessage.classList.remove('shake');
+        void loginMessage.offsetWidth;
+        loginMessage.classList.add('shake');
+      }
+    }
+
+    async function register() {
+      try {
+        const username = document.getElementById('usernameRegister').value;
+        const password = document.getElementById('passwordRegister').value;
+        const res = await api('/auth/register', {
+          method: 'POST',
+          body: { username, password }
+        });
+        if (res.success) {
+          registerMessage.textContent = "Compte crée avec succès";
+          registerMessage.classList.add('visible');
+          registerMessage.classList.add('success');
+        }
+      } catch (e) {
+        registerMessage.textContent = e.message;
+        registerMessage.classList.remove('success');
+        registerMessage.classList.add('visible');
+        registerMessage.classList.remove('shake');
+        void registerMessage.offsetWidth;
+        registerMessage.classList.add('shake');
+      }
+    }
+  </script>
+</body>
+</html>
