@@ -18,13 +18,13 @@ app.use(cookieParser())
 
 app.use(express.static('public'))
 
-app.use('/auth', authRoutes)
-app.use('/couple', coupleRoutes)
-app.use('/note', noteRoutes)
-app.use('/memory', memoryRoutes)
-app.use('/stats', statsRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/couple', coupleRoutes)
+app.use('/api/note', noteRoutes)
+app.use('/api/memory', memoryRoutes)
+app.use('/api/stats', statsRoutes)
 
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' })
 })
 
