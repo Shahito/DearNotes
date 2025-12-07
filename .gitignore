@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 node_modules
 .env
 /src/generated/prisma
@@ -29,4 +28,3 @@ config/.env
 *.tmp
 *.bak
 *.swp
->>>>>>> 4806122bb81fc5f6c463dc65e047e864ae2db9e2
