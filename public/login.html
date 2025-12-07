@@ -47,6 +47,15 @@
   <script src="js/form_switch.js"></script>
   <script src="js/input_type_toggle.js"></script>
   <script>
+    (async () => {
+      try {
+        const me = await api('/auth/me');
+        if (me.user) window.location = '/board.html';
+      } catch(e) {
+        return;
+      }
+    })();
+
     toggle("password");
     toggle("passwordRegister");
     document.getElementById("loginForm").addEventListener("submit", async (e)=>{
