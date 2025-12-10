@@ -14,7 +14,7 @@ async function registerController(req, res) {
     const user = await register(displayUsername, password)
     res.json({ success: true })
   } catch (e) {
-    res.status(400).json({ error: e.message })
+    res.status(409).json({ error: e.message })
   }
 }
 
@@ -38,7 +38,8 @@ async function loginController(req, res) {
 
     res.json({ success:true })
   } catch(e) {
-    res.status(400).json({ error:e.message })
+    await new Promise(r => setTimeout(r, 200)); // anti brute-force minimal
+    res.status(401).json({ error:e.message })
   }
 }
 
@@ -56,7 +57,7 @@ async function changePasswordController(req, res) {
     await changePassword(req.user.id, oldPassword, newPassword);
     res.json({ success: true });
   } catch (e) {
-    res.status(400).json({ error: e.message });
+    res.status(401).json({ error: e.message });
   }
 }
 
