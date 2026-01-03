@@ -16,7 +16,7 @@ async function randomMemory(userId){
   const today = new Date().toISOString().slice(0,10);
   const seed = parseInt(`${user.coupleId}${today.replace(/-/g,'')}`,10);
   const r = seedRandom(seed);
-  const index = Math.floor(r * memories.length);
+  let index = Math.floor(r * memories.length);
 
   // récup d'hier pour éviter redondance directe
     const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
