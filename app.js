@@ -9,6 +9,7 @@ const coupleRoutes = require('./src/routes/couple')
 const noteRoutes = require('./src/routes/note')
 const memoryRoutes = require('./src/routes/memory')
 const statsRoutes = require('./src/routes/stats');
+const patchnotesRoutes = require('./src/routes/patchnotes');
 
 const app = express()
 const PORT = 4000
@@ -23,6 +24,7 @@ app.use('/api/couple', coupleRoutes)
 app.use('/api/note', noteRoutes)
 app.use('/api/memory', memoryRoutes)
 app.use('/api/stats', statsRoutes)
+app.use('/api/patchnotes', patchnotesRoutes)
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' })

@@ -14,7 +14,9 @@ model User {
   password        String
   createdAt       DateTime  @default(now())
   lastActive      DateTime  @default(now())
-
+  
+  deletedAt       DateTime?
+  
   coupleId        Int?
   couple          Couple?   @relation("CoupleMembers", fields: [coupleId], references: [id])
 

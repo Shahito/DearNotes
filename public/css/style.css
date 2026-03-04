@@ -533,6 +533,159 @@ div.canvas-wrapper {
     border: 2px solid var(--border);
 }
 
+#patchNotesOverlay {
+    background-color: var(--shadow);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 220ms ease 0ms;
+}
+#patchNotesOverlay.patchnotes-hidden {
+    opacity: 0;
+    pointer-events: none!important;
+    transition: opacity 220ms ease 220ms;
+}
+.patchnotes-hidden * {
+    pointer-events: none!important;
+}
+#patchnotesClose {
+    /* position: absolute;
+    bottom: 1rem;   
+    right: 1rem; */
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+#patchnotesClose svg {
+    stroke: var(--text-light);
+    stroke-width: 3;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.patchnotes-modal {
+    width: calc(100% - 4.5rem);
+    height: auto;
+    max-height: calc(100% - 4rem);
+    overflow-y: scroll;
+    background-color: var(--peach-light);
+    border: 2px solid var(--border);
+    box-shadow: 0px 6px 0px var(--shadow);
+    border-radius: 1.25rem;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 220ms ease 500ms, transform 220ms cubic-bezier(.2,1.4,.4,1) 500ms;
+}
+#patchNotesOverlay.patchnotes-hidden .patchnotes-modal {
+    opacity: 0;
+    transform: scale(0.92);
+    pointer-events: none!important;
+    transition-delay: 0ms;
+}
+#patchnotes-title {
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 1rem 1rem;
+}
+.pn-carousel{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pn-arrow {
+    padding: 0.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    cursor: pointer;
+    border-radius: 0.8rem;
+}
+.pn-arrow svg {
+    stroke: var(--text-light);
+    stroke-width: 2;
+    width: 0.8rem;
+    height: 0.8rem;
+}
+#pn-next svg {
+    rotate: 180deg;
+}
+.pn-arrow:disabled {
+  opacity: .35;
+  cursor: default;
+}
+.pn-viewport {
+    width: 100%;
+    overflow: hidden;
+}
+.pn-track {
+    display: flex;
+    flex-direction: row;
+}
+.pn-slide {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.pn-slide img{
+  max-width: 12rem;
+}
+
+.pn-slide p{
+  margin: 0;
+  white-space: pre-line;
+  text-wrap: balance;
+  width: 80%;
+}
+
+.pn-dots{
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pn-dot{
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 2px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  opacity: .6;
+}
+
+.pn-dot.is-active{
+  background: var(--border);
+  opacity: 1;
+}
+.patchnotes-feature img {
+    width: 3rem;
+}
+
 main#home {
     position: relative;
     background-color: #ffe8ce;
@@ -913,6 +1066,10 @@ header nav.closed {
     pointer-events: none;
 }
 
+header nav.closed button {
+    user-select: none;
+}
+
 header nav button {
     padding: 0.6rem 1.125rem;
     width: 100%;
@@ -938,12 +1095,68 @@ header nav button {
     rotate: 0deg;
 }
 
+/* Help page */
+#help {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: min(70%, 20rem);
+    gap: 1rem;
+    background-color: var(--peach);
+    border: 2px solid var(--border);
+    box-shadow: 0px 6px 0px var(--shadow);
+    border-radius: 1.25rem;
+    padding: 1rem 1.25rem;
+}
+
+#help a {
+    width: fit-content;
+}
+
+/* Mentions légales */
+#policiesMain {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--peach);
+    padding: 0 1rem;
+}
+
+#mentions-legales {
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 40rem);
+    height: 100%;
+    padding: 2rem 0 3rem 0;
+    overflow-y: scroll;
+    gap: 1rem;
+}
+
+.bloc {
+    background-color: var(--peach-light);
+    border: 2px solid var(--border);
+    box-shadow: 0px 6px 0px var(--shadow);
+    border-radius: 1.25rem;
+    padding: 1rem 1.25rem;
+}
+
 @media only screen and (min-width:1100px) {
     #settingsMain {
         flex-direction: row;
     }
     #statsSection {
         flex: 1;
+    }
+    .patchnotes-modal {
+        width: min(45rem, calc(70% - 4.5rem));
+        height: auto;
+    }
+    .pn-slide p{
+        width: 80%;
     }
 }
 
