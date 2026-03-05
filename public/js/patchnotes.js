@@ -1,4 +1,4 @@
-const PATCHNOTES_VERSION = "2.1.1";
+const PATCHNOTES_VERSION = "2.2.0";
 const STORAGE_KEY = "patchnotesLastSeen";
 
 document.addEventListener("DOMContentLoaded", async () => {
