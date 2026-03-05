@@ -32,6 +32,6 @@ app.get('/api/health', (req, res) => {
 
 cron.schedule('*/15 * * * *', expireNotes)
 
-app.listen(PORT, () => {
+app.listen(PORT, '127.0.0.1', () => {
   console.log(`Server running at http://localhost:${PORT}`)
 })
