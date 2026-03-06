@@ -46,21 +46,6 @@ async function logout() {
   let checking = false;
   let bannerVersion = null;
 
-  // TEMP FIX:
-  // Some users still have an old HTML page open (mobile tab restore behavior).
-  // The new app.js may be loaded without the HTML being reloaded, causing a
-  // mismatch between the page and the current assets.
-  // We show the reload banner once using localStorage to force a refresh so
-  // users get the updated HTML.
-  // This block can be removed once most users have refreshed at least once.
-  (async () => {
-    const TEMP_FLAG = "patchnotesLastSeen";
-    if (!localStorage.getItem(TEMP_FLAG)) {
-        const version = await fetchVersion();
-        showBanner(version);
-    }
-  })()
-
   function hardReload(newVersion) {
     const url = new URL(window.location.href);
     url.searchParams.set("_v", newVersion);
