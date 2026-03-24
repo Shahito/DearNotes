@@ -39,7 +39,7 @@ async function logout() {
 // Update Manager
 (() => {
   const VERSION_URL = "/version.txt";
-  const CHECK_INTERVAL_MS = 30_000; // 30s
+  const CHECK_INTERVAL_MS = 10_000; // 10s
   const AUTO_RELOAD = false; // true = reload without warning
 
   let currentVersion = null;
