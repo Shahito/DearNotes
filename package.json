@@ -14,7 +14,8 @@
     "cookie-parser": "^1.4.7",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "node-cron": "^4.2.1"
+    "node-cron": "^4.2.1",
+    "random-seed-weighted-chooser": "^1.1.11"
   },
   "devDependencies": {
     "@prisma/client": "^6.19.2",

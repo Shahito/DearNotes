@@ -38,6 +38,7 @@ model Note {
   image     Bytes     @db.MediumBlob
   createdAt DateTime @default(now())
   expiresAt DateTime
+  lastSeenAt DateTime?
   isMemory  Boolean  @default(false)
 
   author    User     @relation("UserNotes", fields: [authorId], references: [id]) // MATCH
