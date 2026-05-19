@@ -24,7 +24,7 @@
 
 **DearNotes** is a private, ephemeral shared wall for couples.
 
-Post sticky notes, small sketches, and little moments — they live for **24 hours**, then quietly disappear. If a day goes by without anything new, a random past memory resurfaces for 24h, as a gentle reminder of something you once shared.
+Post sticky notes, small sketches, and little moments - they live for **24 hours**, then quietly disappear. If a day goes by without anything new, a random past memory resurfaces for 24h, as a gentle reminder of something you once shared.
 
 > *Not a chat app. Not a feed. Just a quiet little space between two people.*
 
@@ -34,10 +34,10 @@ Post sticky notes, small sketches, and little moments — they live for **24 hou
 
 No install. No setup. Just open the app and invite your partner.
 
-[![Open the app](https://img.shields.io/badge/Open_the_app-%E2%9C%A8-f4a0b5?style=for-the-badge&labelColor=fde8ef)](https://app.dearnotes.shabox.dev)
+[![Open the app](https://img.shields.io/badge/Open_the_app-%F0%9F%94%97%E2%80%8B-f4a0b5?style=for-the-badge&labelColor=fde8ef)](https://app.dearnotes.shabox.dev)
 
 1. Create an account
-2. Invite your partner with a link
+2. Invite your partner with a code
 3. Start leaving notes 
 
 <br/>
@@ -46,25 +46,25 @@ No install. No setup. Just open the app and invite your partner.
 
 | | |
 |---|---|
-| 📝 **Post-its & Drawings** | Leave sticky notes or small hand-drawn sketches on your shared wall |
+| 📝 **Post-its & drawings** | Leave sticky notes or small hand-drawn sketches on your shared wall |
 | ⏳ **Ephemeral by design** | Notes disappear after 24 hours, keeping the wall always fresh |
 | 🎞️ **Random memories** | If the wall goes quiet, a past note resurfaces for the day |
-| 💑 **Coupled accounts** | One wall, two people — invite with a simple code |
+| 💑 **Coupled accounts** | One wall, two people - invite with a simple code |
 
 <br/>
 
 ## Tech stack
 
-- **Frontend** — HTML · CSS · Vanilla JavaScript
-- **Backend** — Node.js · Express
-- **ORM** — Prisma
-- **Database** — MySQL
+- **Frontend** - HTML · CSS · Vanilla JavaScript
+- **Backend** - Node.js · Express
+- **ORM** - Prisma
+- **Database** - MySQL
 
 <br/>
 
 ## Run your own instance
 
-The code is open source — if you're a developer and want to host your own version, you're welcome to.
+The code is open source - if you're a developer and want to host your own version, you're welcome to.
 
 ```bash
 git clone https://github.com/Shahito/dearnotes.git
@@ -79,7 +79,7 @@ npm run dev
 
 ## License
 
-MIT — code is yours to use, just don't claim it as your own 💛
+MIT - code is yours to use, just don't claim it as your own 💛
 
 ---
 
