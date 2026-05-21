@@ -12,7 +12,7 @@ function timeLeftFromDate(dateStr){
 }
 
 (async () => {
-  const user = await requireAuth(); // redirige si pas loggé
+  const user = await requireAuth(); // redirect if not logged in
   
   const stats = await api('/stats');
   if(stats.partner) {
@@ -41,9 +41,9 @@ async function displayCoupleCode() {
     const code = document.getElementById('coupleCode').innerText;
     try{
       await navigator.clipboard.writeText(code);
-      alert("Code copié !");
+      alert(t("couple.copied"));
     } catch(e) {
-      alert("Impossible de copier le code.");
+      alert(t("couple.copy_error"));
     }
   });
 }
@@ -56,7 +56,7 @@ function initCoupleZone() {
       const r = await api('/couple/create', { method: 'POST' });
       window.location.reload();
     } catch (e) {
-      alert(e.message);
+      alert(t("error." + e.message) || t("error.UNKNOWN"));
     }
   };
 
@@ -69,7 +69,7 @@ function initCoupleZone() {
       });
       if (r.success) window.location.reload();
     } catch (e) {
-      alert(e.message);
+      alert(t("error." + e.message) || t("error.UNKNOWN"));
     }
   };
 }
@@ -182,7 +182,7 @@ async function loadNotes() {
         img.className = "note-img";
         
         const span = document.createElement("span");
-        span.textContent = "Temps restant : " + timeLeftFromDate(n.expiresAt);
+        span.textContent = t("notes.time_left") + " " + timeLeftFromDate(n.expiresAt);
 
         const shadow = document.createElement("div");
         shadow.className = "shadow";
@@ -202,21 +202,25 @@ async function loadNotes() {
     } else {
       const m = await api('/memory/random');
       if (m.memory) {
-        const formatApiDate = s => new Date(Date.parse(s)).toLocaleDateString('fr-FR');
+        const formatApiDate = s => new Date(Date.parse(s)).toLocaleDateString(i18nCurrentLang() === 'fr' ? 'fr-FR' : 'en-GB', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
         memoryDiv.innerHTML =`
           <img class='memory-gif' src='/images/bubu_dudu_gif/hug_endless.gif' alt='Gif couple Dudu et Bubu'/>
           <button id='memories-reveal' onClick="displayMemory()">
-          Voir un souvenir aléatoire</button>
-          <span class='memories-title'>Le souvenir d'aujourd'hui</span>
+          ${t("memory.reveal_btn")}</button>
+          <span class='memories-title'>${t("memory.title")}</span>
           <div class='notes memory-notes loaded'>
           <img src='${m.memory.image}' alt='Note'/>
-          <span>Créée le ${formatApiDate(m.memory.createdAt)}</span>
+          <span>${t("memory.created_hint")} ${formatApiDate(m.memory.createdAt)}</span>
           <div class='shadow'></div><div class='spotlight'></div></div>`;
       } else {
         memoryDiv.innerHTML = `
         <img class='memory-gif' src="/images/bubu_dudu_gif/bored_endless.gif" alt="Gif Dudu s'ennui"/>
         <button id='memories-reveal' class='no-memories'>
-        Aucune note archivée</button>`;
+        ${t("memory.none_btn")}</button>`;
       }
     }
   } catch (e) {

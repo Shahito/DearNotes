@@ -1,19 +1,20 @@
 <!-- public/write.html -->
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-i18n-title="page.title.write">
 <head>
   <meta charset="UTF-8">
   <title>DearNotes - Dessiner une note</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="/images/tab/tab-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <script src="js/i18n.js"></script>
 </head>
 <body>
   <header>
     <nav id="menu" class="closed">
-      <a href="board.html" tabindex="-1"><button>Nos notes</button></a>
-      <a href="settings.html" tabindex="-1"><button>Paramètres</button></a>
-      <button onclick="logout()">Déconnexion</button>
+      <a href="board.html" tabindex="-1"><button data-i18n="menu.notes"></button></a>
+      <a href="settings.html" tabindex="-1"><button data-i18n="menu.settings"></button></a>
+      <button onclick="logout()" data-i18n="menu.logout"></button>
     </nav>
     <button id="menuTrigger" class="closed" tabindex="1">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" alt="Icône menu">
@@ -91,14 +92,17 @@
         </div>
     </main>
 
-    <script>
+  <script>
+    initI18n();
+  </script>
+  <script>
     document.querySelectorAll('.color-brush').forEach(colorBrush => {
         const color = colorBrush.getAttribute('color');
         if (color) {
             colorBrush.style.backgroundColor = color;
         }
     });
-    </script>
+  </script>
   <script src="js/app.js"></script>
   <script src="js/write.js"></script>
   <script src="js/menu.js"></script>

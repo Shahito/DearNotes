@@ -1,0 +1,80 @@
+{
+  "menu.notes": "Nos notes",
+  "menu.add_note": "Ajouter une note",
+  "menu.settings": "Paramètres",
+  "menu.help": "Aide",
+  "menu.help_back": "Retour à l'aide",
+  "menu.logout": "Déconnexion",
+
+  "page.title.login": "DearNotes - Connexion",
+  "page.title.board": "DearNotes - Mur",
+  "page.title.settings": "DearNotes - Paramètres",
+  "page.title.help": "DearNotes - Aide",
+  "page.title.write": "DearNotes - Dessiner une note",
+
+  "error.USERNAME_TAKEN": "Ce nom d'utilisateur est déjà pris",
+  "error.INVALID_CREDENTIALS": "Identifiants invalides",
+  "error.USER_NOT_FOUND": "Utilisateur introuvable",
+  "error.INVALID_OLD_PASSWORD": "Ancien mot de passe incorrect",
+  "error.UNKNOWN": "Une erreur est survenue",
+  "error.ALREADY_IN_COUPLE": "Tu es déjà dans un couple",
+  "error.INVALID_INVITE_CODE": "Code d'invitation invalide",
+  "error.COUPLE_FULL": "Un partenaire est déjà connecté",
+
+  "couple.join_placeholder": "Code d'invitation",
+  "couple.join_btn": "Rejoindre",
+  "couple.create_btn": "Créer un couple",
+  "couple.create_hint": "*Créer un couple génère un code à partager.",
+  "couple.share_hint": "Envoie ce code à ton partenaire pour rejoindre votre couple :",
+  "couple.copy_btn": "Copier",
+  "couple.copied": "Code copié !",
+  "couple.copy_error": "Impossible de copier le code.",
+
+  "memory.title": "Le souvenir d'aujourd'hui",
+  "memory.reveal_btn": "Voir un souvenir aléatoire",
+  "memory.none_btn": "Aucune note archivée",
+  "memory.created_hint": "Créée le",
+
+  "settings.stats_title": "Statistiques",
+  "settings.password_title": "Changer le mot de passe",
+  "settings.old_password": "Ancien mot de passe",
+  "settings.new_password": "Nouveau mot de passe",
+  "settings.update_btn": "Mettre à jour",
+  "settings.password_success": "Mot de passe changé avec succès",
+  "settings.required_fields": "Tous les champs sont obligatoires",
+  "settings.lang_title": "Langue",
+  "settings.no_partner": "personne pour l'instant",
+
+  "update.banner": "Une nouvelle version est disponible.",
+  "update.reload_btn": "Recharger la page",
+
+  "help.title": "Aide",
+  "help.legal": "Accéder aux mentions légales",
+  "help.bug": "Signaler un problème",
+
+  "login.login_title": "Connexion",
+  "login.register_title": "Inscription",
+  "login.username": "Nom d'utilisateur",
+  "login.password": "Mot de passe",
+  "login.login_btn": "Se connecter",
+  "login.register_btn": "Créer un compte",
+  "login.register_switch": "Créer mon compte",
+  "login.login_switch": "Se connecter",
+  "login.register_success": "Compte créé avec succès",
+
+  "stats.sent": "Notes envoyées",
+  "stats.received": "Notes reçues",
+  "stats.relation": "En relation avec <b>{partner}</b> depuis le <b>{since}</b>",
+  "stats.no_partner": "personne pour l'instant",
+
+  "note.confirm_send": "Es-tu sûr de vouloir envoyer la note ? 💌\nLes notes envoyées ne peuvent plus être modifiées.",
+  "note.confirm_clear": "Es-tu sûr de vouloir effacer la note ? 🧽",
+  "note.send_success": "Note envoyée !",
+  "note.send_error": "Erreur en envoyant la note",
+  "notes.time_left": "Temps restant :",
+
+  "legal.title": "Mentions légales",
+
+  "help.report_subject": "Bug DearNotes",
+  "help.report_body": "Version : {version}%0A%0AExpliquez le problème (Vous pouvez ajouter des images si nécessaire) :"
+}

@@ -1,6 +1,6 @@
 <!-- public/board.html -->
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-i18n-title="page.title.board">
 <head>
   <meta charset="UTF-8">
   <title>DearNotes - Mur</title>
@@ -9,14 +9,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#eb9399" />
+  <script src="js/i18n.js"></script>
 </head>
 <body>
   <header>
     <nav id="menu" class="closed">
-      <a href="write.html" tabindex="-1"><button>Ajouter une note</button></a>
-      <a href="settings.html" tabindex="-1"><button>Paramètres</button></a>
-      <a href="help.html" tabindex="-1"><button>Aide</button></a>
-      <button onclick="logout()">Déconnexion</button>
+      <a href="write.html" tabindex="-1"><button data-i18n="menu.add_note"></button></a>
+      <a href="settings.html" tabindex="-1"><button data-i18n="menu.settings"></button></a>
+      <a href="help.html" tabindex="-1"><button data-i18n="menu.help"></button></a>
+      <button onclick="logout()" data-i18n="menu.logout"></button>
     </nav>
     <button id="menuTrigger" class="closed" tabindex="1">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" alt="Icône menu">
@@ -57,20 +58,23 @@
   <section id="coupleZone" class="hidden">
     <h2>Couple</h2>
     <form id="joinCoupleForm">
-      <input id="inviteCode" placeholder="Code d'invitation" required>
-      <button id="joinCoupleBtn" type='submit'>Rejoindre</button>
+      <input id="inviteCode"  data-i18n="couple.join_placeholder" data-i18n-attr="placeholder" required>
+      <button id="joinCoupleBtn" type='submit' data-i18n="couple.join_btn"></button>
     </form>
     <div id="createCoupleSection">
-      <button id="createCoupleBtn">Créer un couple</button>
-      <p>*Créer un couple génère un code à partager.</p>
+      <button id="createCoupleBtn" data-i18n="couple.create_btn"></button>
+      <p data-i18n="couple.create_hint"></p>
     </div>
     <div id="coupleInfo">
-      <p>Envoie ce code à ton partenaire pour rejointre votre couple :</p>
+      <p data-i18n="couple.share_hint"></p>
       <p id="coupleCode"></p>
-      <button id="copyCoupleCode">Copier</button>
+      <button id="copyCoupleCode" data-i18n="couple.copy_btn"></button>
     </div>
   </section>
 
+  <script>
+    initI18n();
+  </script>
   <script src="js/app.js"></script>
   <script src="js/patchnotes.js"></script>
   <script src="js/board.js"></script>

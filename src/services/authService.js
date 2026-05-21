@@ -7,7 +7,7 @@ async function register(username, password) {
   const normalized = username.toLowerCase();   // version stockée pour login
 
   const exists = await prisma.user.findUnique({ where: { username: normalized } })
-  if (exists) throw new Error("Username already taken")
+  if (exists) throw new Error("USERNAME_TAKEN")
 
   const hash = await bcrypt.hash(password, 10)
 
@@ -24,10 +24,10 @@ async function login(username, password) {
   const normalized = username.toLowerCase();
 
   const user = await prisma.user.findUnique({ where: { username: normalized } })
-  if (!user) throw new Error("Identifiants invalides")
+  if (!user) throw new Error("INVALID_CREDENTIALS")
 
   const ok = await bcrypt.compare(password, user.password)
-  if (!ok) throw new Error("Identifiants invalides")
+  if (!ok) throw new Error("INVALID_CREDENTIALS")
 
   await prisma.user.update({
     where: { id: user.id },
@@ -40,10 +40,10 @@ async function login(username, password) {
 
 async function changePassword(userId, oldPassword, newPassword) {
   const user = await prisma.user.findUnique({ where: { id: userId } });
-  if (!user) throw new Error('User not found');
+  if (!user) throw new Error('USER_NOT_FOUND');
 
   const ok = await bcrypt.compare(oldPassword, user.password);
-  if (!ok) throw new Error('Anicen mot de passe invalide');
+  if (!ok) throw new Error('INVALID_OLD_PASSWORD');
 
   const hash = await bcrypt.hash(newPassword, 10);
   await prisma.user.update({

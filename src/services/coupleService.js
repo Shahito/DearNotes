@@ -3,8 +3,8 @@ const { generateInviteCode } = require('../utils/code')
 
 async function createCouple(userId) {
   const user = await prisma.user.findUnique({ where: { id: userId } })
-  if (!user) throw new Error("User not found")
-  if (user.coupleId) throw new Error("Already in a couple")
+  if (!user) throw new Error("USER_NOT_FOUND")
+  if (user.coupleId) throw new Error("ALREADY_IN_COUPLE")
 
   const couple = await prisma.couple.create({
     data: {
@@ -18,15 +18,15 @@ async function createCouple(userId) {
 
 async function joinCouple(userId, code) {
   const user = await prisma.user.findUnique({ where: { id: userId } })
-  if (!user) throw new Error("User not found")
-  if (user.coupleId) throw new Error("Already in a couple")
+  if (!user) throw new Error("USER_NOT_FOUND")
+  if (user.coupleId) throw new Error("ALREADY_IN_COUPLE")
 
   const couple = await prisma.couple.findUnique({ where: { inviteCode: code } })
-  if (!couple) throw new Error("Code d'invitation invalide")
+  if (!couple) throw new Error("INVALID_INVITE_CODE")
 
   // Vérifie que le couple n’est pas déjà plein
   const members = await prisma.user.findMany({ where: { coupleId: couple.id } })
-  if (members.length >= 2) throw new Error("Un partenaire est déjà connecté")
+  if (members.length >= 2) throw new Error("COUPLE_FULL")
 
   return prisma.user.update({
     where: { id: userId },

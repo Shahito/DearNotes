@@ -1,0 +1,80 @@
+{
+  "menu.notes": "Our notes",
+  "menu.add_note": "Add a note",
+  "menu.settings": "Settings",
+  "menu.help": "Help",
+  "menu.help_back": "Back to help",
+  "menu.logout": "Log out",
+
+  "page.title.login": "DearNotes - Login",
+  "page.title.board": "DearNotes - Board",
+  "page.title.settings": "DearNotes - Settings",
+  "page.title.help": "DearNotes - Help",
+  "page.title.write": "DearNotes - Draw a note",
+
+  "error.USERNAME_TAKEN": "This username is already taken",
+  "error.INVALID_CREDENTIALS": "Invalid credentials",
+  "error.USER_NOT_FOUND": "User not found",
+  "error.INVALID_OLD_PASSWORD": "Current password is incorrect",
+  "error.UNKNOWN": "An error occurred",
+  "error.ALREADY_IN_COUPLE": "You are already in a couple",
+  "error.INVALID_INVITE_CODE": "Invalid invite code",
+  "error.COUPLE_FULL": "A partner is already connected",
+
+  "couple.join_placeholder": "Invite code",
+  "couple.join_btn": "Join",
+  "couple.create_btn": "Create a couple",
+  "couple.create_hint": "*Creating a couple generates a code to share.",
+  "couple.share_hint": "Send this code to your partner to join your couple:",
+  "couple.copy_btn": "Copy",
+  "couple.copied": "Code copied!",
+  "couple.copy_error": "Unable to copy the code.",
+
+  "memory.title": "Today's memory",
+  "memory.reveal_btn": "View a random memory",
+  "memory.none_btn": "No notes archived",
+  "memory.created_hint": "Created on",
+
+  "settings.stats_title": "Statistics",
+  "settings.password_title": "Change password",
+  "settings.old_password": "Current password",
+  "settings.new_password": "New password",
+  "settings.update_btn": "Update",
+  "settings.password_success": "Password changed successfully",
+  "settings.required_fields": "All fields are required",
+  "settings.lang_title": "Language",
+  "settings.no_partner": "nobody yet",
+
+  "update.banner": "A new version is available.",
+  "update.reload_btn": "Reload page",
+
+  "help.title": "Help",
+  "help.legal": "Legal notice",
+  "help.bug": "Report a problem",
+
+  "login.login_title": "Log in",
+  "login.register_title": "Sign up",
+  "login.username": "Username",
+  "login.password": "Password",
+  "login.login_btn": "Log in",
+  "login.register_btn": "Create account",
+  "login.register_switch": "Create my account",
+  "login.login_switch": "Log in",
+  "login.register_success": "Account created successfully",
+
+  "stats.sent": "Notes sent",
+  "stats.received": "Notes received",
+  "stats.relation": "In a relationship with <b>{partner}</b> since <b>{since}</b>",
+  "stats.no_partner": "nobody yet",
+
+  "note.confirm_send": "Are you sure you want to send this note? 💌\nSent notes cannot be edited.",
+  "note.confirm_clear": "Are you sure you want to clear the note? 🧽",
+  "note.send_success": "Note sent!",
+  "note.send_error": "Error sending the note",
+  "notes.time_left": "Time left :",
+
+  "legal.title": "Legal notice",
+
+  "help.report_subject": "Bug DearNotes",
+  "help.report_body": "Version: {version}%0A%0ADescribe the problem (you can attach screenshots if needed):"
+}

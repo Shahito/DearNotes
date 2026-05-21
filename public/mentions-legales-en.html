@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>DearNotes - Mentions légales</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="/images/tab/tab-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <script src="js/i18n.js"></script>
+    <script>
+    initI18n().then(() => {
+        if (i18nCurrentLang() === 'fr') {
+        window.location = '/mentions-legales-fr.html';
+        }
+    });
+    </script>
+</head>
+<body>
+  <header>
+    <nav id="menu" class="closed">
+      <a href="help.html" tabindex="-1"><button data-i18n="menu.help_back"></button></a>
+    </nav>
+    <button id="menuTrigger" class="closed" tabindex="1">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" alt="Icône menu">
+        <path d="M64 360c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zm0-160c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zM120 96c0 30.9-25.1 56-56 56S8 126.9 8 96S33.1 40 64 40s56 25.1 56 56z"></path>
+      </svg>
+    </button>
+  </header>
+
+  <main id="policiesMain">
+    <section id="mentions-legales">
+      <h1>Legal Notice</h1>
+
+      <div class="bloc">
+          <h2>Website Publisher</h2>
+          <p>
+          The website <strong>DearNotes</strong> is published by:
+          </p>
+          <ul>
+          <li>Name : Paturange Duncan</li>
+          <li>Status: Private individual</li>
+          <li>Email : <a href="mailto:admin@shabox.dev">admin@shabox.dev</a></li>
+          </ul>
+          <p>
+          In accordance with Article 6 III-2 of French Law No. 2004-575 of June 21, 2004 on confidence in the digital economy, the publisher has chosen not to publicly disclose their personal address.
+          </p>
+      </div>
+
+      <div class="bloc">
+          <h2>Hosting Provider</h2>
+          <ul>
+          <li>Hosting provider: Hetzner Online GmbH</li>
+          <li>Address : Industriestr. 25, 91710 Gunzenhausen, Germany</li>
+          <li>Website : <a href="https://www.hetzner.com" target="_blank" rel="noopener noreferrer">https://www.hetzner.com</a></li>
+          </ul>
+      </div>
+
+      <div class="bloc">
+          <h2>Publication Director</h2>
+          <p>Paturange Duncan</p>
+      </div>
+
+      <div class="bloc">
+          <h2>Service Description</h2>
+          <p>
+          <b>DearNotes</b> is a web application that allows two connected users to exchange private messages in the form of digital sticky notes.
+          </p>
+          <p>
+          Messages remain visible for 24 hours before being archived, and may later reappear randomly.
+          </p>
+      </div>
+
+      <div class="bloc">
+          <h2>Personal Data</h2>
+          <p>
+          The website only collects data strictly necessary for the operation of the service:
+          </p>
+          <ul>
+          <li>Username</li>
+          <li>Password (stored securely in hashed form)</li>
+          <li>Content of exchanged messages</li>
+          <li>Technical session cookies</li>
+          </ul>
+          <p>
+          Data is retained for as long as the user account remains active.
+          Users may request the deletion of their account and associated data by contacting: 
+          <a href="mailto:admin@shabox.dev">admin@shabox.dev</a>.
+          </p>
+          <p>
+          In accordance with the General Data Protection Regulation (GDPR), every user has the right to access, correct, and delete their personal data.
+          </p>
+      </div>
+
+      <div class="bloc">
+          <h2>Cookies</h2>
+          <p>
+          The website only uses cookies that are strictly necessary for the operation of the service and user authentication.
+          No advertising, tracking, or third-party analytics cookies are used.
+          </p>
+      </div>
+
+      <div class="bloc">
+          <h2>Intellectual Property</h2>
+          <p>
+          The entire website, including its code and original visual elements, is the exclusive property of the publisher.
+          </p>
+          <p>
+          Certain external graphic assets (the “Bubu & Dudu” GIFs) remain the property of their respective creators.
+          </p>
+      </div>
+
+      <div class="bloc">
+          <h2>Liability</h2>
+          <p>
+          The service is provided on an experimental basis.
+          The publisher cannot be held liable for service interruptions, data loss, or misuse of the platform by users.
+          </p>
+          <p>
+          Each user is solely responsible for the content they publish or exchange through the platform.
+          </p>
+      </div>
+      <div class="bloc">
+        Last updated: May 2026
+      </div>
+      </section>
+    </main>
+    <script>
+      initI18n();
+    </script>
+    <script src="js/app.js"></script>
+    <script src="js/menu.js"></script>
+  </body>
+</html>

@@ -1,8 +1,15 @@
 {
-  "version": "2.2.0",
-  "title": "Nouvelle mise à jour!",
-  "features": [
-    { "text": "Vous pouvez désormais voir les nouveautés directement sur le site.\nÀ chaque nouvelle version, un aperçu des améliorations, corrections et nouvelles fonctionnalités s'affichera automatiquement pour ne rien manquer.\nSimple, clair, et toujours à jour." },
-    { "text": "Un nouveau menu Aide est disponible dans l'application.\nVous pouvez désormais y retrouver facilement :\n- les mentions légales\n- un bouton pour signaler un problème\n- les informations de version de l'application\nUn moyen simple d'accéder rapidement aux informations utiles et de contacter le support si nécessaire." }
-  ]
+  "version": "2.5.0",
+  "title": {
+    "fr": "L'appli parle maintenant votre langue !",
+    "en": "The app now speaks your language!"
+  },
+  "features": {
+    "fr": [
+      { "text": "DearNotes est maintenant disponible en français et en anglais.\nLa langue est détectée automatiquement selon les préférences de votre navigateur. Vous pouvez changer la langue manuellement à tout moment depuis la page Paramètres." }
+    ],
+    "en": [
+      { "text": "DearNotes is now available in French and English.\nThe language is automatically detected based on your browser preferences. You can manually change the language at any time from the Settings page." }
+    ]
+  }
 }

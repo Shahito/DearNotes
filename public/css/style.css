@@ -141,7 +141,8 @@ form {
     cursor: pointer;
 }
 
-input {
+input,
+select {
     background: var(--white);
     border: none;
     box-shadow: 0px 6px 0px var(--shadow);
@@ -160,7 +161,8 @@ input {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-input:focus {
+input:focus,
+select:focus {
     outline: 2px solid var(--border);
     box-shadow: 0px 4px 0px var(--shadow);
     transform: scale(1.05) translateZ(0);
@@ -984,6 +986,38 @@ div.notes::after {
 
 #stats p {
     margin: 0;
+}
+
+.lang-select {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
+    border-top: 2px solid var(--shadow);
+}
+
+.lang-select h3 {
+    margin: 0;
+}
+
+.lang-select-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.lang-select-btns button {
+    padding: 0.4rem 0.75rem;
+}
+
+button.not-selected {
+    background-color: var(--peach-light);
+    color: var(--text);
 }
 
 #changePasswordSection {

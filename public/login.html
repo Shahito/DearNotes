@@ -1,6 +1,6 @@
 <!-- public/index.html -->
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-i18n-title="page.title.login">
 <head>
   <meta charset="UTF-8">
   <title>DearNotes - Connexion</title>
@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#eb9399" />
+  <script src="js/i18n.js"></script>
 </head>
 <body>
   <main id="loginMain">
@@ -17,34 +18,37 @@
       <h1>DearNotes</h1>
     </div>
     <div id="loginSection">
-      <h2>Connexion</h2>
+      <h2 data-i18n="login.login_title">Connexion</h2>
       <form id="loginForm">
-        <input type="text" id="username" placeholder="Nom d'utilisateur" autocomplete="name" required>
+        <input type="text" id="username" data-i18n="login.username" data-i18n-attr="placeholder" autocomplete="name" required>
         <div class="input-view-wrapper">
-          <input id="password" type="password" placeholder="Mot de passe"required>
+          <input id="password" type="password" data-i18n="login.password" data-i18n-attr="placeholder" required>
           <span id="toggle-password" class="view-toggle" tabindex="0"></span>
         </div>
-        <p class="message">Nope nope</p>
-        <button type="submit">Se connecter</button>
+        <p class="message"></p>
+        <button type="submit" data-i18n="login.login_btn"></button>
       </form>
-      <p id="registerSwitch" tabindex="0">Créer mon compte</p>
+      <p id="registerSwitch" tabindex="0" data-i18n="login.register_switch"></p>
     </div>
 
     <div id="registerSection" class="hidden">
-      <h2>Inscription</h2>
+      <h2 data-i18n="login.register_title"></h2>
       <form id="registerForm">
-        <input id="usernameRegister" type="text" placeholder="Nom d'utilisateur" required>
+        <input id="usernameRegister" type="text" data-i18n="login.username" data-i18n-attr="placeholder" required>
         <div class="input-view-wrapper">
-          <input id="passwordRegister" type="password" placeholder="Mot de passe" required>
+          <input id="passwordRegister" type="password" data-i18n="login.password" data-i18n-attr="placeholder" required>
           <span id="toggle-passwordRegister" class="view-toggle" tabindex="0"></span>
         </div>
         <p class="message"></p>
-        <button type="submit">Créer un compte</button>
+        <button type="submit" data-i18n="login.register_btn"></button>
       </form>
-      <p id="loginSwitch" tabindex="0">Se conencter</p>
+      <p id="loginSwitch" tabindex="0" data-i18n="login.login_switch"></p>
     </div>
   </main>
 
+  <script>
+    initI18n();
+  </script>
   <script src="js/app.js"></script>
   <script src="js/form_switch.js"></script>
   <script src="js/input_type_toggle.js"></script>
@@ -82,7 +86,7 @@
         });
         if (res.success) window.location = '/board.html';
       } catch (e) {
-        loginMessage.textContent = e.message;
+        loginMessage.textContent = t("error." + e.message) || t("error.UNKNOWN");
         loginMessage.classList.add('visible');
         loginMessage.classList.remove('shake');
         void loginMessage.offsetWidth;
@@ -99,12 +103,12 @@
           body: { username, password }
         });
         if (res.success) {
-          registerMessage.textContent = "Compte crée avec succès";
+          registerMessage.textContent = t("login.register_success");
           registerMessage.classList.add('visible');
           registerMessage.classList.add('success');
         }
       } catch (e) {
-        registerMessage.textContent = e.message;
+        registerMessage.textContent = t("error." + e.message) || t("error.UNKNOWN");
         registerMessage.classList.remove('success');
         registerMessage.classList.add('visible');
         registerMessage.classList.remove('shake');

@@ -1,6 +1,6 @@
 // public/js/app.js
 
-// wrapper fetch avec cookies + JSON auto
+// wrapper fetch with cookies + JSON auto
 async function api(url, options = {}) {
   options.credentials = 'include';
 
@@ -19,7 +19,7 @@ async function api(url, options = {}) {
   return data;
 }
 
-// vérifie qu'on est loggé, sinon redirige vers login
+// Check login, else redirect to login page
 async function requireAuth() {
   try {
     const me = await api('/auth/me');
@@ -30,13 +30,14 @@ async function requireAuth() {
   }
 }
 
-// logout simple (on kill le cookie côté client)
+// TODO: improve logout system
+// Simple logout (just kill cookie client side)
 async function logout() {
   await api('/auth/logout', { method: "POST" });
   window.location = "/login.html";
 }
 
-// Update Manager
+// Update manager
 (() => {
   const VERSION_URL = "/version.txt";
   const CHECK_INTERVAL_MS = 10_000; // 10s
@@ -77,7 +78,7 @@ async function logout() {
 
     const msg = document.createElement("div");
     msg.style.flex = "1";
-    msg.textContent = "Une nouvelle version est disponible.";
+    msg.textContent = t("update.banner");
 
     const actions = document.createElement("div");
     actions.style.display = "flex";
@@ -87,7 +88,7 @@ async function logout() {
 
     const reload = document.createElement("button");
     reload.type = "button";
-    reload.textContent = "Recharger la page";
+    reload.textContent = t("update.reload_btn");
     reload.style.padding = "0.6rem";
     reload.style.display = "flex";
     reload.style.justifyContent = "center";

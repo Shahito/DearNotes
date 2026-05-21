@@ -1,6 +1,6 @@
 // public/js/write.js
 (async () => {
-  await requireAuth(); // on s'en fout du retour, on veut juste être loggé
+  await requireAuth(); // login check, otherwise redirect to login page
 })();
 
 // Configuration globale
@@ -32,7 +32,7 @@ let protectionActive = true;
 
 window.addEventListener("beforeunload", (e) => protectBrowserUndo(e));
 
-// Utilise les dimensions CSS réelles du canvas
+// Use real CSS dimensions of the canvas
 function initCanvas() {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
@@ -95,14 +95,14 @@ function updateUndoRedoButtons() {
     const undoButton = document.getElementById(config.undoButtonId);
     const redoButton = document.getElementById(config.redoButtonId);
 
-    // Désactiver ou activer le bouton Undo
+    // Disable or enable the Undo button
     if (history.length === 0) {
         undoButton.classList.add('inactive-btn');
     } else {
         undoButton.classList.remove('inactive-btn');
     }
 
-    // Désactiver ou activer le bouton Redo
+    // Disable or enable the Redo button
     if (redoStack.length === 0) {
         redoButton.classList.add('inactive-btn');
     } else {
@@ -118,7 +118,7 @@ function protectBrowserUndo(e) {
 }
 
 async function sendCanvas() {
-    if (confirm("Es-tu sûr de vouloir envoyer la note ? 💌\nLes notes envoyées ne peuvent plus être modifiées.")) {
+    if (confirm(t("note.confirm_send"))) {
         protectionActive = false;
         try {
             const dataURL = canvas.toDataURL('image/png');
@@ -127,9 +127,9 @@ async function sendCanvas() {
             body: { image: dataURL }
             });
             if (res.success) window.location = '/board.html';
-            else alert(res.error || 'Erreur en envoyant la note');
+            else alert(res.error || t("note.send_error"));
         } catch (e) {
-            alert(e.message);
+            alert(t("error." + e.message) || t("error.UNKNOWN"));
         }
     }
 }
@@ -169,7 +169,7 @@ function redo() {
 }
 
 function clearCanvas() {
-    if (confirm("Es-tu sûr de vouloir effacer la note ? 🧽")) {
+    if (confirm(t("note.confirm_clear"))) {
         saveState();
         ctx.fillStyle = config.clearColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);

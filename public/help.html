@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-i18n-title="page.title.help">
 <head>
   <meta charset="UTF-8">
   <title>DearNotes - Aide</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="/images/tab/tab-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <script src="js/i18n.js"></script>
 </head>
 <body>
   <header>
     <nav id="menu" class="closed">
-      <a href="board.html" tabindex="-1"><button>Nos notes</button></a>
-      <button onclick="logout()">Déconnexion</button>
+      <a href="board.html" tabindex="-1"><button data-i18n="menu.notes"></button></a>
+      <button onclick="logout()" data-i18n="menu.logout"></button>
     </nav>
     <button id="menuTrigger" class="closed" tabindex="1">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" alt="Icône menu">
@@ -22,11 +23,11 @@
 
   <main id="settingsMain">
     <section id="statsSection">
-    <h1>Aide</h1>
+    <h1 data-i18n="help.title"></h1>
     <div id="help">
-      <a href="mentions-legales.html" tabindex="-1"><button>Accéder aux mentions légales</button></a>
+      <a href="mentions-legales-fr.html" tabindex="-1"><button data-i18n="help.legal"></button></a>
       <a href="mailto:admin@shabox.dev" id="reportBug" tabindex="-1">
-        <button>Signaler un problème</button>
+        <button data-i18n="help.bug"></button>
       </a>
       <button type="button" onclick="window.openPatchnotesManual()" id="versionButton">Version 1.0.0</button>
     </div>
@@ -59,7 +60,15 @@
   </section>
   </main>
 
+  <script>
+    initI18n();
+  </script>
   <script src="js/app.js"></script>
+  <script>
+    (async () => {
+      const user = await requireAuth(); // login check, otherwise redirect to login page
+    })();
+  </script>
   <script src="js/menu.js"></script>
   <script src="js/patchnotes.js"></script>
   <script>
@@ -72,9 +81,10 @@
 
         const link = document.getElementById("reportBug");
         const versionButton = document.getElementById("versionButton");
-
-        link.href =
-          `mailto:admin@shabox.dev?subject=Bug%20DearNotes&body=Version%3A%20${encodeURIComponent(version)}%0A%0AExpliquez%20le%20problème%20(Vous%20pouvez%20ajouter%20des%20images%20si%20nécessaire):`;
+        
+        const subject = encodeURIComponent(t("help.report_subject"));
+        const body = t("help.report_body", { version: encodeURIComponent(version) });
+        link.href = `mailto:admin@shabox.dev?subject=${subject}&body=${body}`;
         if(versionButton) versionButton.innerText = `Version ${encodeURIComponent(version)}`;
 
       } catch (err) {
@@ -84,6 +94,6 @@
     }
 
     initVersion();
-    </script>
+  </script>
 </body>
 </html>

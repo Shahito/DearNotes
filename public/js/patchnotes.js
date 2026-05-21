@@ -1,4 +1,4 @@
-const PATCHNOTES_VERSION = "2.2.0";
+const PATCHNOTES_VERSION = "2.5.0";
 const STORAGE_KEY = "patchnotesLastSeen";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -25,14 +25,15 @@ let pnIndex = 0;
 let pnCount = 0;
 
 function buildPatchnotes(data) {
-  document.getElementById("patchnotes-title").textContent = data.title || "";
+  const lang = i18nCurrentLang();
+  document.getElementById("patchnotes-title").textContent = data.title?.[lang] || data.title?.fr || "";
 
   const track = document.getElementById("pn-track");
   const dots = document.getElementById("pn-dots");
   const prevBtn = document.getElementById("pn-prev");
   const nextBtn = document.getElementById("pn-next");
 
-  const features = Array.isArray(data.features) ? data.features : [];
+  const features = Array.isArray(data.features?.[lang]) ? data.features[lang] : (data.features?.fr || []);
   pnCount = features.length;
   pnIndex = 0;
 
@@ -70,7 +71,7 @@ function buildPatchnotes(data) {
   prevBtn.onclick = () => goToSlide(pnIndex - 1);
   nextBtn.onclick = () => goToSlide(pnIndex + 1);
 
-  // Close button (inchangé mais stocke la bonne version)
+  // Close button (store the right version)
   document.getElementById("patchnotesClose").onclick = () => {
     localStorage.setItem(STORAGE_KEY, data.version);
     hidePatchnotes();

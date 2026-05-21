@@ -1,58 +1,69 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>DearNotes - Paramètres</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="/images/tab/tab-icon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-</head>
-<body>
-  <header>
-    <nav id="menu" class="closed">
-      <a href="board.html" tabindex="-1"><button>Nos notes</button></a>
-      <a href="write.html" tabindex="-1"><button>Ajouter une note</button></a>
-      <button onclick="logout()">Déconnexion</button>
-    </nav>
-    <button id="menuTrigger" class="closed" tabindex="1">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" alt="Icône menu">
-        <path d="M64 360c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zm0-160c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zM120 96c0 30.9-25.1 56-56 56S8 126.9 8 96S33.1 40 64 40s56 25.1 56 56z"></path>
-      </svg>
-    </button>
-  </header>
+<html lang="fr" data-i18n-title="page.title.settings">
+  <head>
+    <meta charset="UTF-8">
+    <title>DearNotes - Paramètres</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="/images/tab/tab-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <script src="js/i18n.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav id="menu" class="closed">
+        <a href="board.html" tabindex="-1"><button data-i18n="menu.notes"></button></a>
+        <a href="write.html" tabindex="-1"><button data-i18n="menu.add_note"></button></a>
+        <button onclick="logout()" data-i18n="menu.logout"></button>
+      </nav>
+      <button id="menuTrigger" class="closed" tabindex="1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" alt="Icône menu">
+          <path d="M64 360c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zm0-160c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zM120 96c0 30.9-25.1 56-56 56S8 126.9 8 96S33.1 40 64 40s56 25.1 56 56z"></path>
+        </svg>
+      </button>
+    </header>
 
-  <main id="settingsMain">
-    <section id="statsSection">
-    <h2>Statistiques</h2>
-    <div id="stats">
-      <div class="loader"></div>
-    </div>
-  </section>
+    <main id="settingsMain">
+      <section id="statsSection">
+        <h2 data-i18n="settings.stats_title"></h2>
+        <div id="stats">
+          <div class="loader"></div>
+          <div class="lang-select">
+            <h3 data-i18n="settings.lang_title"></h3>
+            <div class="lang-select-btns">
+              <button class="not-selected" id="fr" onclick="setLang('fr')">FR</button>
+              <button class="not-selected" id="en" onclick="setLang('en')">EN</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section id="changePasswordSection">
-    <h2>Changer le mot de passe</h2>
-    <form id="changePasswordForm">
-      <div class="input-view-wrapper">
-        <input type="password" id="oldPassword" placeholder="Ancien mot de passe" required>
-        <span id="toggle-oldPassword" class="view-toggle" tabindex="0"></span>
-      </div>
-      <div class="input-view-wrapper">
-        <input type="password" id="newPassword" placeholder="Nouveau mot de passe" required>
-        <span id="toggle-newPassword" class="view-toggle" tabindex="0"></span>
-      </div>
-      <p class="message"></p>
-      <button type="submit" id="changePasswordBtn">Mettre à jour</button>
-    </form>
-  </section>
-  </main>
+      <section id="changePasswordSection">
+        <h2 data-i18n="settings.password_title"></h2>
+        <form id="changePasswordForm">
+          <div class="input-view-wrapper">
+            <input type="password" id="oldPassword" data-i18n="settings.old_password" data-i18n-attr="placeholder" required>
+            <span id="toggle-oldPassword" class="view-toggle" tabindex="0"></span>
+          </div>
+          <div class="input-view-wrapper">
+            <input type="password" id="newPassword" data-i18n="settings.new_password" data-i18n-attr="placeholder" required>
+            <span id="toggle-newPassword" class="view-toggle" tabindex="0"></span>
+          </div>
+          <p class="message"></p>
+          <button type="submit" id="changePasswordBtn" data-i18n="settings.update_btn"></button>
+        </form>
+      </section>
+    </main>
 
-  <script src="js/app.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/menu.js"></script>
-  <script src="js/input_type_toggle.js"></script>
-  <script>
-    toggle("oldPassword");
-    toggle("newPassword");
-  </script>
-</body>
+    <script>
+      initI18n();
+    </script>
+    <script src="js/app.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/input_type_toggle.js"></script>
+    <script>
+      toggle("oldPassword");
+      toggle("newPassword");
+    </script>
+  </body>
 </html>

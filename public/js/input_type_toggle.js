@@ -15,7 +15,7 @@ function toggle(id){
         input.type = input.type === "password" ? "text" : "password";
         trigger.innerHTML = input.type === "password" ? lock : lock_open;
     });
-    // keyboard (Enter ou Space)
+    // keyboard (Enter or Space)
     trigger.addEventListener("keydown", e => {
         if(e.key === "Enter" || e.key === " ") {
             e.preventDefault();
