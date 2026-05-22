@@ -14,13 +14,14 @@ model User {
   password        String
   createdAt       DateTime  @default(now())
   lastActive      DateTime  @default(now())
+  onboardingWrite Boolean @default(false)
   
   deletedAt       DateTime?
   
   coupleId        Int?
   couple          Couple?   @relation("CoupleMembers", fields: [coupleId], references: [id])
 
-  notes           Note[]    @relation("UserNotes")   // <--- AJOUT
+  notes           Note[]    @relation("UserNotes")
 }
 
 model Couple {

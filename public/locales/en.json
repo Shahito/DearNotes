@@ -1,4 +1,20 @@
 {
+  "onboarding.progress": "{{current}} of {{total}}",
+  "onboarding.next": "Next",
+  "onboarding.prev": "Back",
+  
+  "onboarding_write.step1.title": "Controls",
+  "onboarding_write.step1.desc": "Clear the canvas with the cross, undo or redo strokes with the arrows, and send your note with the checkmark.",
+  "onboarding_write.step2.title": "Drawing area",
+  "onboarding_write.step2.desc": "Draw here with your finger. For more precision, a stylus works wonders.",
+  "onboarding_write.step3.title": "Color",
+  "onboarding_write.step3.desc": "Tap here to open the color palette.",
+  "onboarding_write.step4.title": "The palette",
+  "onboarding_write.step4.desc": "Pick from the preset colors to customize your stroke.",
+  "onboarding_write.step5.title": "Brush size",
+  "onboarding_write.step5.desc": "4 brush sizes available, from finest to largest.",
+  "onboarding_write.done": "Let's draw!",
+
   "menu.notes": "Our notes",
   "menu.add_note": "Add a note",
   "menu.settings": "Settings",

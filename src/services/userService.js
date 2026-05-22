@@ -1,7 +1,10 @@
 const prisma = require('../utils/prisma')
 
+const ONBOARDING_FIELDS = {
+  write: 'onboardingWrite',
+}
+
 async function touchActivity(userId) {
-    
   const user = await prisma.user.findUnique({ 
     where:{ id:userId },
     select:{ lastActive:true }
@@ -22,4 +25,14 @@ async function touchActivity(userId) {
   }
 }
 
-module.exports = { touchActivity }
+async function completeOnboarding(userId, key) {
+  const field = ONBOARDING_FIELDS[key]
+  if (!field) throw new Error('INVALID_ONBOARDING_KEY')
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: { [field]: true }
+  })
+}
+
+module.exports = { touchActivity, completeOnboarding }

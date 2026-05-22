@@ -1,6 +1,10 @@
 // public/js/write.js
 (async () => {
-  await requireAuth(); // login check, otherwise redirect to login page
+  const [user] = await Promise.all([
+    requireAuth(),
+    new Promise(resolve => document.addEventListener('i18n:ready', resolve, { once: true }))
+  ]);
+  if (!user.onboardingWrite) startOnboarding();
 })();
 
 // Configuration globale

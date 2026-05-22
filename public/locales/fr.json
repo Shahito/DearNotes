@@ -1,4 +1,20 @@
 {
+  "onboarding.progress": "{{current}} sur {{total}}",
+  "onboarding.next": "Suivant",
+  "onboarding.prev": "Précédent",
+
+  "onboarding_write.step1.title": "Les boutons",
+  "onboarding_write.step1.desc": "La croix efface tout le dessin, les flèches permettent d'annuler ou de rétablir un trait, et la coche envoie la note à ton partenaire.",
+  "onboarding_write.step2.title": "Le dessin",
+  "onboarding_write.step2.desc": "Dessine ici avec ton doigt. Pour plus de précision, un stylet tactile change vraiment la donne.",
+  "onboarding_write.step3.title": "La couleur",
+  "onboarding_write.step3.desc": "Appuie sur ce bouton pour ouvrir la palette et changer de couleur.",
+  "onboarding_write.step4.title": "La palette",
+  "onboarding_write.step4.desc": "Une sélection de couleurs prêtes à l'emploi pour personnaliser tes dessins.",
+  "onboarding_write.step5.title": "L'épaisseur du trait",
+  "onboarding_write.step5.desc": "Quatre tailles de pinceau disponibles, du plus fin au plus épais.",
+  "onboarding_write.done": "C'est parti !",
+
   "menu.notes": "Nos notes",
   "menu.add_note": "Ajouter une note",
   "menu.settings": "Paramètres",

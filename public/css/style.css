@@ -951,6 +951,96 @@ div.notes::after {
     pointer-events: none;
 }
 
+/* Driver.js custom theme */
+
+.driver-popover.driverjs-theme {
+  background-color: var(--peach-light);
+  border: 2px solid var(--border);
+  /* box-shadow: 0px 6px 0px var(--shadow); */
+  border-radius: 1.25rem;
+  color: var(--text);
+  font-family: 'SignikaNegative';
+  padding: 1.25rem 1.5rem !important;
+}
+
+.driver-popover {
+  background-color: var(--peach-light) !important;
+  border: 2px solid var(--border) !important;
+  /* box-shadow: 0px 6px 0px var(--shadow) !important; */
+  border-radius: 1.25rem !important;
+  color: var(--text) !important;
+  font-family: 'SignikaNegative' !important;
+}
+
+.driver-popover-arrow {
+    border-width: 0.5rem!important;
+}
+.driver-popover.driverjs-theme .driver-popover-arrow-side-left.driver-popover-arrow {
+  border-left-color: var(--border)!important;
+}
+.driver-popover.driverjs-theme .driver-popover-arrow-side-right.driver-popover-arrow {
+  border-right-color: var(--border)!important;
+}
+.driver-popover.driverjs-theme .driver-popover-arrow-side-top.driver-popover-arrow {
+  border-top-color: var(--border)!important;
+}
+.driver-popover.driverjs-theme .driver-popover-arrow-side-bottom.driver-popover-arrow {
+  border-bottom-color: var(--border)!important;
+}
+
+.driver-popover-title {
+    display: flex;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+  color: var(--text) !important;
+  font-family: 'SignikaNegative' !important;
+}
+
+.driver-popover-description {
+  font-size: 1rem !important;
+  color: var(--text) !important;
+  font-family: 'SignikaNegative' !important;
+}
+
+.driver-popover-progress-text {
+  color: var(--text) !important;
+  font-family: 'SignikaNegative' !important;
+}
+
+.driver-popover-footer {
+  margin-top: 0.75rem !important;
+}
+
+.driver-popover-prev-btn,
+.driver-popover-next-btn,
+.driver-popover-done-btn {
+  background: var(--pink) !important;
+  border: 2px solid var(--border) !important;
+  box-shadow: 0px 4px 0px var(--shadow) !important;
+  color: var(--text-light) !important;
+  font-family: 'SignikaNegative' !important;
+  font-weight: bold !important;
+  border-radius: 1.5rem !important;
+  padding: 0.4rem 1rem !important;
+  text-shadow: none !important;
+  font-size: 0.75rem!important;
+}
+
+.driver-popover-prev-btn:hover,
+.driver-popover-next-btn:hover,
+.driver-popover-done-btn:hover {
+  transform: scale(1.05) !important;
+  opacity: 1 !important;
+}
+
+.driver-popover-arrow-side-top.driver-popover-arrow {
+  border-top-color: var(--border) !important;
+}
+
+.driver-popover-close-btn {
+  color: var(--text) !important;
+}
+
 /* Settings page */
 
 #settingsMain {
@@ -1064,7 +1154,7 @@ a {
     width: 100%;
 }
 
-header {
+header#nav {
     position: absolute;
     bottom: 1.25rem;
     right: 1.25rem;
