@@ -370,6 +370,38 @@ span.inactive-btn {
     opacity: 0.5;
 }
 
+#zoom-indicator {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text);
+    opacity: 0.4;
+    cursor: default;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    user-select: none;
+}
+
+#zoom-indicator.active {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.canvas-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 3px solid transparent;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+    z-index: 1;
+}
+
+.canvas-wrapper.zoomed::after {
+    border-color: var(--pink);
+}
+
 div#draw-palette {
     justify-content: space-between;
     gap: 1.2rem;

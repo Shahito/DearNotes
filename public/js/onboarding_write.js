@@ -32,10 +32,18 @@ async function startOnboarding() {
             }
         },
         {
-            element: '#selected-brush',
+            element: '#zoom-indicator',
             popover: {
                 title: t("onboarding_write.step3.title"),
                 description: t("onboarding_write.step3.desc"),
+                side: "bottom"
+            }
+        },
+        {
+            element: '#selected-brush',
+            popover: {
+                title: t("onboarding_write.step4.title"),
+                description: t("onboarding_write.step4.desc"),
                 side: "top",
                 onNextClick: () => {
                     document.querySelectorAll("#color-palette span.color-brush").forEach(brush => {
@@ -50,8 +58,8 @@ async function startOnboarding() {
         {
             element: '#color-palette',
             popover: {
-                title: t("onboarding_write.step4.title"),
-                description: t("onboarding_write.step4.desc"),
+                title: t("onboarding_write.step5.title"),
+                description: t("onboarding_write.step5.desc"),
                 side: "top",
                 onPrevClick: () => {
                     document.querySelectorAll("#color-palette span.color-brush").forEach(brush => {
@@ -74,8 +82,8 @@ async function startOnboarding() {
         {
             element: '#brush-size-selector',
             popover: {
-                title: t("onboarding_write.step5.title"),
-                description: t("onboarding_write.step5.desc"),
+                title: t("onboarding_write.step6.title"),
+                description: t("onboarding_write.step6.desc"),
                 side: "top",
                 onPrevClick: () => {
                     document.querySelectorAll("#color-palette span.color-brush").forEach(brush => {
