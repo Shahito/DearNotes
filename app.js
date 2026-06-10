@@ -1,5 +1,6 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const rateLimit = require('express-rate-limit')
 const cron = require('node-cron')
 const prisma = require('./src/utils/prisma')
 
@@ -20,6 +21,17 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use(express.static('public'))
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15m
+  max: 20, // 20 tries/IP
+  message: { error: 'TOO_MANY_REQUESTS' },
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+app.use('/api/auth/login', authLimiter)
+app.use('/api/auth/register', authLimiter)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)

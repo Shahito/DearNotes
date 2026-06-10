@@ -32,6 +32,7 @@
 
   "error.USERNAME_TAKEN": "Ce nom d'utilisateur est déjà pris",
   "error.INVALID_CREDENTIALS": "Identifiants invalides",
+  "error.TOO_MANY_REQUESTS": "Trop de requêtes. Réessayer ultérieurement.",
   "error.USER_NOT_FOUND": "Utilisateur introuvable",
   "error.INVALID_OLD_PASSWORD": "Ancien mot de passe incorrect",
   "error.UNKNOWN": "Une erreur est survenue",

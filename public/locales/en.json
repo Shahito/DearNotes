@@ -32,6 +32,7 @@
 
   "error.USERNAME_TAKEN": "This username is already taken",
   "error.INVALID_CREDENTIALS": "Invalid credentials",
+  "error.TOO_MANY_REQUESTS": "Too many requests. Try again later.",
   "error.USER_NOT_FOUND": "User not found",
   "error.INVALID_OLD_PASSWORD": "Current password is incorrect",
   "error.UNKNOWN": "An error occurred",
