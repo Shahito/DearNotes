@@ -137,11 +137,26 @@ async function logout() {
   }
 
   // Mobile (bfcache / tab restore)
+  const startTime = Date.now();
+
+  window.addEventListener('pagehide', () => {
+    navigator.sendBeacon('/api/metrics/end', JSON.stringify({
+      event: 'pagehide',
+      duration: Date.now() - startTime
+    }));
+  });
+
   window.addEventListener("pageshow", () => check("pageshow"));
 
   // Re-check
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") check("visible");
+    if (document.visibilityState === "visible") { check("visible") }
+    else if (document.visibilityState === 'hidden') {
+      navigator.sendBeacon('/api/metrics/end', JSON.stringify({
+        event: 'hidden',
+        duration: Date.now() - startTime
+      }));
+    }
   });
 
   // Focus
