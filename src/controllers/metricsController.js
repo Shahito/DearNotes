@@ -1,4 +1,4 @@
-const { parseBody, logUserLeft } = require('../services/metricsService');
+const { parseBody, logUserLeft, logMemoryReveal } = require('../services/metricsService');
 
 async function endSession(req, res) {
   const data = parseBody(req.body);
@@ -6,4 +6,9 @@ async function endSession(req, res) {
   res.sendStatus(204);
 }
 
-module.exports = { endSession };
+async function revealMemory(req, res) {
+  await logMemoryReveal(req.body);
+  res.sendStatus(204);
+}
+
+module.exports = { endSession, revealMemory };

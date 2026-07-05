@@ -8,4 +8,8 @@ async function logUserLeft(data) {
   log('User left:', data);
 }
 
-module.exports = { parseBody, logUserLeft };
+async function logMemoryReveal(data) {
+  log('Memory revealed:', data);
+}
+
+module.exports = { parseBody, logUserLeft, logMemoryReveal };

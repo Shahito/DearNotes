@@ -376,6 +376,7 @@ async function loadNotes() {
 
 function displayMemory() {
   document.getElementById('memory').setAttribute('drawn','');
+  api('/metrics/reveal', { method: 'POST', body: { memoryId } }).catch(() => {});
 }
 
 // Called on resume (visibilitychange -> visible, or pageshow with persisted).
